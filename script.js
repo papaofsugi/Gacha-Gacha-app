@@ -1,36 +1,44 @@
-// 100種類のアイテムを生成
-const items = Array.from({ length: 100 }, (_, i) => ({
-  name: `アイテム${i + 1}`,
-  rarity: getRarity()
-}));
+let items = [];
 
-// レア度をランダムに割り当てる関数
-function getRarity() {
-  const rand = Math.random() * 100;
-  if (rand < 5) return "SSR";
-  if (rand < 20) return "SR";
-  if (rand < 50) return "R";
-  return "N";
+document.getElementById("csvInput").addEventListener("change", function (e) {
+  const file = e.target.files[0];
+  if (!file) return;
+
+  const reader = new FileReader();
+  reader.onload = function (event) {
+    const text = event.target.result;
+    items = parseCSV(text);
+    alert(`CSV読み込み完了！アイテム数：${items.length}`);
+  };
+  reader.readAsText(file);
+});
+
+function parseCSV(text) {
+  const lines = text.trim().split("\n");
+  const result = [];
+  for (let i = 1; i < lines.length; i++) {
+    const [name, rarity] = lines[i].split(",");
+    result.push({ name: name.trim(), rarity: rarity.trim() });
+  }
+  return result;
 }
 
-// ランダムに3つのアイテムを選ぶ（重複なし）
 function getThreeItems() {
   const shuffled = [...items].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, 3);
 }
 
-// ボタンのクリックイベント
 document.getElementById("gacha-button").addEventListener("click", () => {
+  if (items.length === 0) {
+    alert("CSVを読み込んでください！");
+    return;
+  }
+
   const results = getThreeItems();
-
-  // 表示を毎回クリアして新しく描画
-  const resultContainer = document.getElementById("result");
-  resultContainer.innerHTML = ""; // ← ここで前の結果を消す
-
-  results.forEach(item => {
-    const div = document.createElement("div");
-    div.className = "item";
-    div.innerHTML = `🎉 <strong>${item.rarity}</strong>：${item.name}`;
-    resultContainer.appendChild(div);
-  });
+  const resultHTML = results.map(item => {
+    return `<div class="item">
+              <span class="rarity">${item.rarity}</span>：<span class="name">${item.name}</span>
+            </div>`;
+  }).join("");
+  document.getElementById("result").innerHTML = resultHTML;
 });
