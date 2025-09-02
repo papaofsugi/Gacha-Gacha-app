@@ -1,26 +1,14 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <title>ガチャガチャ</title>
-  <style>
-    body { text-align: center; font-family: sans-serif; padding: 50px; background: #fffbe7; }
-    button { font-size: 1.2em; padding: 10px 20px; margin-top: 20px; }
-    #result { margin-top: 30px; font-size: 1.5em; color: #d35400; }
-  </style>
+  <title>ガチャガチャアプリ</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>🎲 ガチャガチャを回そう！</h1>
-  <button onclick="spin()">ガチャを回す</button>
-  <div id="result">結果がここに表示されます</div>
-
-  <script>
-    const items = ["SSR ドラゴン 🐉", "SR 魔法の杖 ✨", "R 銅の盾 🛡️", "N 木の棒 🪵", "UR 宝石 💎"];
-    function spin() {
-      const result = items[Math.floor(Math.random() * items.length)];
-      document.getElementById("result").textContent = `🎉 あなたの結果: ${result}`;
-    }
-  </script>
+  <h1>🎁 ガチャガチャを回そう！</h1>
+  <button id="gacha-button">ガチャを回す</button>
+  <div id="result"></div>
+  <script src="script.js"></script>
 </body>
 </html>
