@@ -1,30 +1,27 @@
-const items = [
-  { name: "レアなぬいぐるみ", rarity: "SSR" },
-  { name: "かわいいキーホルダー", rarity: "SR" },
-  { name: "ステッカー", rarity: "R" },
-  { name: "お菓子", rarity: "N" }
-];
+// 100種類のアイテムを生成（例：Item 1〜Item 100）
+const items = Array.from({ length: 100 }, (_, i) => ({
+  name: `アイテム${i + 1}`,
+  rarity: getRarity()
+}));
 
-const probabilities = {
-  SSR: 5,
-  SR: 15,
-  R: 30,
-  N: 50
-};
-
-function getRandomItem() {
+// レア度をランダムに割り当てる関数
+function getRarity() {
   const rand = Math.random() * 100;
-  let cumulative = 0;
-  for (const rarity in probabilities) {
-    cumulative += probabilities[rarity];
-    if (rand < cumulative) {
-      const filtered = items.filter(item => item.rarity === rarity);
-      return filtered[Math.floor(Math.random() * filtered.length)];
-    }
-  }
+  if (rand < 5) return "SSR";
+  if (rand < 20) return "SR";
+  if (rand < 50) return "R";
+  return "N";
 }
 
+// ランダムに3つのアイテムを選ぶ（重複なし）
+function getThreeItems() {
+  const shuffled = [...items].sort(() => 0.5 - Math.random());
+  return shuffled.slice(0, 3);
+}
+
+// ボタンのクリックイベント
 document.getElementById("gacha-button").addEventListener("click", () => {
-  const item = getRandomItem();
-  document.getElementById("result").textContent = `🎉 ${item.rarity}：${item.name} が当たった！`;
+  const results = getThreeItems();
+  const resultText = results.map(item => `🎉 ${item.rarity}：${item.name}`).join("<br>");
+  document.getElementById("result").innerHTML = resultText;
 });
