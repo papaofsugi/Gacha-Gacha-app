@@ -1,4 +1,4 @@
-// 100種類のアイテムを生成（例：Item 1〜Item 100）
+// 100種類のアイテムを生成
 const items = Array.from({ length: 100 }, (_, i) => ({
   name: `アイテム${i + 1}`,
   rarity: getRarity()
@@ -22,6 +22,15 @@ function getThreeItems() {
 // ボタンのクリックイベント
 document.getElementById("gacha-button").addEventListener("click", () => {
   const results = getThreeItems();
-  const resultText = results.map(item => `🎉 ${item.rarity}：${item.name}`).join("<br>");
-  document.getElementById("result").innerHTML = resultText;
+
+  // 表示を毎回クリアして新しく描画
+  const resultContainer = document.getElementById("result");
+  resultContainer.innerHTML = ""; // ← ここで前の結果を消す
+
+  results.forEach(item => {
+    const div = document.createElement("div");
+    div.className = "item";
+    div.innerHTML = `🎉 <strong>${item.rarity}</strong>：${item.name}`;
+    resultContainer.appendChild(div);
+  });
 });
