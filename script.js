@@ -50,22 +50,30 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const resultContainer = document.getElementById("result");
   const body = document.body;
 
-  const result = getOneItem();
+  const result = getOneItem(); // 抽選は先に決定
 
-  // カプセル画像切り替え＆回転開始
-  capsule.src = getCapsuleImage(result.rarity);
-  capsule.classList.add("spin");
+  // 光の演出スタート
+  body.classList.add("glow");
 
-  // 背景キラキラ演出開始
-  body.classList.add("sparkle");
-
-  // 結果表示エリアを一旦クリア
-  resultContainer.innerHTML = "";
+  // カプセル交互表示（1秒ごとに切り替え）
+  const capsuleImages = [
+    "capsule_ssr_red.png",
+    "capsule_sr_green.png",
+    "capsule_r_yellow.png",
+    "capsule_n_blue.png"
+  ];
+  let index = 0;
+  const interval = setInterval(() => {
+    capsule.src = capsuleImages[index];
+    index = (index + 1) % capsuleImages.length;
+  }, 1000);
 
   // 10秒後に演出終了＆結果表示
   setTimeout(() => {
-    capsule.classList.remove("spin");
-    body.classList.remove("sparkle");
+    clearInterval(interval);
+    body.classList.remove("glow");
+
+    capsule.src = getCapsuleImage(result.rarity);
 
     const resultHTML = `<div class="item">
                           <span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>
@@ -75,5 +83,5 @@ document.getElementById("gacha-button").addEventListener("click", () => {
     if (result.rarity === "SSR") {
       alert("🎉超激レアSSRが出た！");
     }
-  }, 10000); // ← 10秒待つ
+  }, 10000);
 });
