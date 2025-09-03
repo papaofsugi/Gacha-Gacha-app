@@ -15,7 +15,7 @@ input[type="file"] {
 }
 
 #capsule {
-  width: 30vw;            /* 画面幅の30%でレスポンシブ対応 */
+  width: 10vw;            /* 画面幅の10%でレスポンシブ対応 */
   max-width: 300px;       /* 最大サイズを制限 */
   transition: transform 0.5s ease;
 }
@@ -65,3 +65,4 @@ button:hover {
 .name {
   color: #333;
 }
+
