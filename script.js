@@ -49,13 +49,18 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const capsule = document.getElementById("capsule");
   const resultContainer = document.getElementById("result");
   const body = document.body;
+  const progressContainer = document.getElementById("progress-bar-container");
 
-  const result = getOneItem(); // 抽選は先に決定
+  const result = getOneItem();
 
-  // 光の演出スタート
+  // 光演出スタート
   body.classList.add("glow");
 
-  // カプセル交互表示（0.2秒ごとに切り替え）
+  // 進行バー表示＆アニメーション開始
+  progressContainer.innerHTML = '<div id="progress-bar"></div>';
+  progressContainer.style.visibility = "visible";
+
+  // カプセル高速切り替え（0.05秒）
   const capsuleImages = [
     "capsule_ssr_red.png",
     "capsule_sr_green.png",
@@ -66,12 +71,13 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const interval = setInterval(() => {
     capsule.src = capsuleImages[index];
     index = (index + 1) % capsuleImages.length;
-  }, 200); // ← 0.2秒間隔
+  }, 50); // ← 0.05秒
 
   // 5秒後に演出終了＆結果表示
   setTimeout(() => {
     clearInterval(interval);
     body.classList.remove("glow");
+    progressContainer.style.visibility = "hidden";
 
     capsule.src = getCapsuleImage(result.rarity);
 
@@ -83,5 +89,5 @@ document.getElementById("gacha-button").addEventListener("click", () => {
     if (result.rarity === "SSR") {
       alert("🎉超激レアSSRが出た！");
     }
-  }, 5000); // ← 5秒待つ
+  }, 5000);
 });
