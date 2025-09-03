@@ -56,9 +56,10 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const progressContainer = document.getElementById("progress-bar-container");
   const gachaButton = document.getElementById("gacha-button");
 
-  // ボタン無効化
+  // ボタン無効化＆視覚的に非アクティブ化
   gachaButton.disabled = true;
   gachaButton.style.opacity = "0.5";
+  gachaButton.style.pointerEvents = "none";
 
   // 初期表示切り替え
   capsuleImg.style.display = "none";
@@ -66,7 +67,6 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   capsuleBottom.classList.remove("hidden", "open-bottom");
   itemPopup.classList.remove("item-reveal");
   itemPopup.innerHTML = "";
-  resultContainer.innerHTML = "";
   progressContainer.innerHTML = "";
   progressContainer.style.visibility = "visible";
 
@@ -118,5 +118,6 @@ document.getElementById("gacha-button").addEventListener("click", () => {
     // ボタン再表示
     gachaButton.disabled = false;
     gachaButton.style.opacity = "1";
+    gachaButton.style.pointerEvents = "auto";
   }, 5000);
 });
