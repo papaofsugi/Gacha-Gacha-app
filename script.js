@@ -48,15 +48,24 @@ document.getElementById("gacha-button").addEventListener("click", () => {
 
   const capsule = document.getElementById("capsule");
   const resultContainer = document.getElementById("result");
+  const body = document.body;
 
   const result = getOneItem();
 
+  // カプセル画像切り替え＆回転開始
   capsule.src = getCapsuleImage(result.rarity);
   capsule.classList.add("spin");
+
+  // 背景キラキラ演出開始
+  body.classList.add("sparkle");
+
+  // 結果表示エリアを一旦クリア
   resultContainer.innerHTML = "";
 
+  // 10秒後に演出終了＆結果表示
   setTimeout(() => {
     capsule.classList.remove("spin");
+    body.classList.remove("sparkle");
 
     const resultHTML = `<div class="item">
                           <span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>
@@ -66,5 +75,5 @@ document.getElementById("gacha-button").addEventListener("click", () => {
     if (result.rarity === "SSR") {
       alert("🎉超激レアSSRが出た！");
     }
-  }, 2000);
+  }, 10000); // ← 10秒待つ
 });
