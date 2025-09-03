@@ -1,3 +1,4 @@
+/* 全体レイアウト */
 body {
   font-family: sans-serif;
   text-align: center;
@@ -6,6 +7,7 @@ body {
   transition: background 0.5s ease;
 }
 
+/* 光演出 */
 body.glow {
   background: linear-gradient(135deg, #fffacd, #f0f8ff);
   background-size: 400% 400%;
@@ -18,16 +20,19 @@ body.glow {
   100% { background-position: 0% 50%; }
 }
 
+/* CSV入力 */
 input[type="file"] {
   margin-bottom: 20px;
 }
 
+/* カプセル演出領域 */
 #capsule-container {
-  margin: 40px auto;
+  margin: 40px auto 20px;
   position: relative;
-  height: 200px;
+  height: auto;
 }
 
+/* カプセル画像 */
 #capsule {
   width: 150px;
   max-width: 300px;
@@ -35,6 +40,7 @@ input[type="file"] {
   z-index: 2;
 }
 
+/* アイテム表示ポップアップ */
 #item-popup {
   font-size: 24px;
   font-weight: bold;
@@ -42,7 +48,7 @@ input[type="file"] {
   opacity: 0;
   transform: scale(0.5);
   transition: all 0.5s ease;
-  margin-top: 100px;
+  margin-top: 30px;
   z-index: 3;
   position: relative;
 }
@@ -52,8 +58,12 @@ input[type="file"] {
   transform: scale(1.2);
 }
 
+/* ガチャボタンの自然配置 */
+#button-area {
+  margin-top: 30px;
+}
+
 #gacha-button {
-  margin-top: 20px;
   padding: 15px 30px;
   font-size: 18px;
   background-color: #ff69b4;
@@ -62,16 +72,18 @@ input[type="file"] {
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.2s;
-  position: relative;
-  z-index: 10;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #gacha-button:hover {
   transform: scale(1.05);
 }
 
+/* 抽選履歴 */
 #result {
-  margin-top: 30px;
+  margin-top: 40px;
 }
 
 .item {
@@ -92,6 +104,7 @@ input[type="file"] {
   color: #333;
 }
 
+/* 進行バー */
 #progress-bar-container {
   width: 66.6%;
   height: 10px;
