@@ -30,6 +30,16 @@ function getOneItem() {
   return items[index];
 }
 
+function getCapsuleColor(rarity) {
+  switch (rarity) {
+    case "SSR": return "#ff6666";
+    case "SR":  return "#66cc66";
+    case "R":   return "#ffcc00";
+    case "N":   return "#6699ff";
+    default:    return "#cccccc";
+  }
+}
+
 document.getElementById("gacha-button").addEventListener("click", () => {
   if (items.length === 0) {
     alert("CSVを読み込んでください！");
@@ -38,11 +48,17 @@ document.getElementById("gacha-button").addEventListener("click", () => {
 
   const result = getOneItem();
   const body = document.body;
-  const progressContainer = document.getElementById("progress-bar-container");
+  const capsuleImg = document.getElementById("capsule");
   const capsuleTop = document.getElementById("capsule-top");
   const capsuleBottom = document.getElementById("capsule-bottom");
   const itemPopup = document.getElementById("item-popup");
   const resultContainer = document.getElementById("result");
+  const progressContainer = document.getElementById("progress-bar-container");
+
+  // 初期画像を非表示、カプセルパーツを表示
+  capsuleImg.style.display = "none";
+  capsuleTop.classList.remove("hidden");
+  capsuleBottom.classList.remove("hidden");
 
   // 光演出スタート
   body.classList.add("glow");
@@ -66,11 +82,13 @@ document.getElementById("gacha-button").addEventListener("click", () => {
     body.classList.remove("glow");
     progressContainer.style.visibility = "hidden";
 
-    // カプセル開く
+    const finalColor = getCapsuleColor(result.rarity);
+    capsuleTop.style.backgroundColor = finalColor;
+    capsuleBottom.style.backgroundColor = finalColor;
+
     capsuleTop.classList.add("open-top");
     capsuleBottom.classList.add("open-bottom");
 
-    // アイテム飛び出す
     itemPopup.innerHTML = `<span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>`;
     itemPopup.classList.add("item-reveal");
 
