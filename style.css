@@ -31,6 +31,8 @@ input[type="file"] {
 #capsule {
   width: 150px;
   max-width: 300px;
+  display: block;
+  margin: 0 auto;
   transition: transform 0.5s ease;
   z-index: 2;
 }
