@@ -64,9 +64,71 @@ input[type="file"] {
 /* ガチャボタン固定表示 */
 #gacha-button {
   position: fixed;
-  bottom: 40px;
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   padding: 15px 30px;
   font-size: 18px;
-  background
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  z-index: 9999;
+}
+
+/* ホバー時の拡大を無効化 */
+#gacha-button:hover {
+  background-color: #ff85c1; /* 色だけ変化させる */
+}
+
+/* 抽選履歴 */
+#result {
+  margin-top: 40px;
+  max-height: 300px;
+  overflow-y: auto;
+  border-top: 1px solid #ccc;
+  padding-top: 10px;
+}
+
+.item {
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+.rarity {
+  font-weight: bold;
+}
+
+.rarity.SSR { color: red; }
+.rarity.SR  { color: green; }
+.rarity.R   { color: orange; }
+.rarity.N   { color: blue; }
+
+.name {
+  color: #333;
+}
+
+/* 進行バー（画面幅の25%） */
+#progress-bar-container {
+  width: 25vw;
+  height: 10px;
+  background-color: #ddd;
+  margin: 20px auto;
+  border-radius: 5px;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #ff69b4;
+  animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
