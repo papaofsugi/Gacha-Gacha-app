@@ -41,6 +41,10 @@ function getCapsuleImage(rarity) {
 }
 
 document.getElementById("gacha-button").addEventListener("click", () => {
+  alert("ボタンが押されました！");
+});
+
+document.getElementById("gacha-button").addEventListener("click", () => {
   if (items.length === 0) {
     alert("CSVを読み込んでください！");
     return;
