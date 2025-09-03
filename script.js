@@ -49,28 +49,21 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const capsule = document.getElementById("capsule");
   const resultContainer = document.getElementById("result");
 
-  const results = getThreeItems();
+  const result = getOneItem();
 
-  const highest = results.find(item => item.rarity === "SSR")
-              || results.find(item => item.rarity === "SR")
-              || results.find(item => item.rarity === "R")
-              || results.find(item => item.rarity === "N");
-
-  capsule.src = getCapsuleImage(highest.rarity);
+  capsule.src = getCapsuleImage(result.rarity);
   capsule.classList.add("spin");
   resultContainer.innerHTML = "";
 
   setTimeout(() => {
     capsule.classList.remove("spin");
 
-    const resultHTML = results.map(item => {
-      return `<div class="item">
-                <span class="rarity ${item.rarity}">${item.rarity}</span>：<span class="name">${item.name}</span>
-              </div>`;
-    }).join("");
+    const resultHTML = `<div class="item">
+                          <span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>
+                        </div>`;
     resultContainer.innerHTML = resultHTML;
 
-    if (results.some(item => item.rarity === "SSR")) {
+    if (result.rarity === "SSR") {
       alert("🎉超激レアSSRが出た！");
     }
   }, 2000);
