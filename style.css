@@ -1,3 +1,4 @@
+/* 全体レイアウト */
 body {
   font-family: sans-serif;
   text-align: center;
@@ -6,6 +7,7 @@ body {
   transition: background 0.5s ease;
 }
 
+/* 光演出 */
 body.glow {
   background: linear-gradient(135deg, #fffacd, #f0f8ff);
   background-size: 400% 400%;
@@ -18,16 +20,20 @@ body.glow {
   100% { background-position: 0% 50%; }
 }
 
+/* CSV入力 */
 input[type="file"] {
   margin-bottom: 20px;
 }
 
+/* カプセル演出領域 */
 #capsule-container {
   margin: 40px auto 20px;
   position: relative;
   height: auto;
+  text-align: center; /* ← 画像中央揃えの保険 */
 }
 
+/* カプセル画像（筐体 or カプセル） */
 #capsule {
   width: 150px;
   max-width: 300px;
@@ -37,6 +43,7 @@ input[type="file"] {
   z-index: 2;
 }
 
+/* アイテム表示ポップアップ */
 #item-popup {
   font-size: 24px;
   font-weight: bold;
@@ -54,6 +61,7 @@ input[type="file"] {
   transform: scale(1.2);
 }
 
+/* ガチャボタン */
 #button-area {
   margin-top: 30px;
 }
@@ -75,6 +83,7 @@ input[type="file"] {
   transform: scale(1.05);
 }
 
+/* 抽選履歴 */
 #result {
   margin-top: 40px;
 }
@@ -97,6 +106,7 @@ input[type="file"] {
   color: #333;
 }
 
+/* 進行バー */
 #progress-bar-container {
   width: 66.6%;
   height: 10px;
