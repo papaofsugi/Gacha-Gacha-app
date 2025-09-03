@@ -56,17 +56,18 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   body.classList.add("glow");
 
   // カプセル交互表示（1秒ごとに切り替え）
-  const capsuleImages = [
-    "capsule_ssr_red.png",
-    "capsule_sr_green.png",
-    "capsule_r_yellow.png",
-    "capsule_n_blue.png"
-  ];
-  let index = 0;
-  const interval = setInterval(() => {
-    capsule.src = capsuleImages[index];
-    index = (index + 1) % capsuleImages.length;
-  }, 1000);
+const capsuleImages = [
+  "capsule_ssr_red.png",
+  "capsule_sr_green.png",
+  "capsule_r_yellow.png",
+  "capsule_n_blue.png"
+];
+let index = 0;
+const interval = setInterval(() => {
+  console.log("切り替え中:", capsuleImages[index]); // ← コンソールに表示
+  capsule.src = capsuleImages[index];
+  index = (index + 1) % capsuleImages.length;
+}, 1000);
 
   // 10秒後に演出終了＆結果表示
   setTimeout(() => {
