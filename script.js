@@ -46,11 +46,6 @@ document.getElementById("gacha-button").addEventListener("click", () => {
     return;
   }
 
-  // 抽選開始時
-  capsuleImg.style.display = "block"; // 画像カプセル表示
-  capsuleTop.classList.add("hidden"); // 分割カプセル非表示
-  capsuleBottom.classList.add("hidden");
-
   const result = getOneItem();
   const body = document.body;
   const capsuleImg = document.getElementById("capsule");
@@ -105,12 +100,12 @@ document.getElementById("gacha-button").addEventListener("click", () => {
     // 抽選結果に応じた画像を表示
     capsuleImg.src = getCapsuleImage(result.rarity);
 
-  // 0.5秒後に分割カプセル表示＆蓋開き
-  setTimeout(() => {
-    capsuleImg.style.display = "none"; // 画像カプセルを非表示
-    capsuleTop.classList.remove("hidden");
-    capsuleBottom.classList.remove("hidden");
-    capsuleTop.classList.add("open-top");
+    // 0.5秒後に分割カプセル表示＆蓋開き
+    setTimeout(() => {
+      capsuleImg.style.display = "none";
+      capsuleTop.classList.remove("hidden");
+      capsuleBottom.classList.remove("hidden");
+      capsuleTop.classList.add("open-top");
     }, 500);
 
     // アイテム表示
