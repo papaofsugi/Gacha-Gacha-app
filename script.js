@@ -15,9 +15,9 @@ document.getElementById("csvInput").addEventListener("change", function (e) {
     alert(`CSV読み込み完了！アイテム数：${items.length}`);
 
     // デバッグ表示（任意）
-    const debug = document.createElement("pre");
-    debug.textContent = JSON.stringify(items, null, 2);
-    document.body.appendChild(debug);
+    //const debug = document.createElement("pre");
+    //debug.textContent = JSON.stringify(items, null, 2);
+    //document.body.appendChild(debug);
   };
   reader.readAsText(file);
 });
