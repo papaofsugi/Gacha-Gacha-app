@@ -66,4 +66,18 @@ button:hover {
   color: #333;
 }
 
+body.sparkle {
+  background-image: radial-gradient(circle, #fff 1px, transparent 1px),
+                    radial-gradient(circle, #ff0 1px, transparent 1px),
+                    radial-gradient(circle, #f0f 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: sparkle 1s linear infinite;
+}
+
+@keyframes sparkle {
+  0% { background-position: 0 0, 10px 10px, 5px 5px; }
+  50% { background-position: 10px 10px, 0 0, 15px 15px; }
+  100% { background-position: 0 0, 10px 10px, 5px 5px; }
+}
+
 
