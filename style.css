@@ -6,7 +6,6 @@ body {
   transition: background 0.5s ease;
 }
 
-/* 光演出 */
 body.glow {
   background: linear-gradient(135deg, #fffacd, #f0f8ff);
   background-size: 400% 400%;
@@ -19,24 +18,65 @@ body.glow {
   100% { background-position: 0% 50%; }
 }
 
-/* ファイル選択 */
 input[type="file"] {
   margin-bottom: 20px;
 }
 
-/* カプセル表示 */
 #capsule-container {
   margin: 40px auto;
-  height: auto;
+  position: relative;
+  height: 200px;
 }
 
-#capsule {
-  width: 30vw;
-  max-width: 300px;
+.capsule-part {
+  width: 150px;
+  height: 75px;
+  background-color: #ff6666;
+  margin: 0 auto;
+  border-radius: 75px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
   transition: transform 0.5s ease;
 }
 
-/* ガチャボタン */
+#capsule-top {
+  top: 0;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+  transform-origin: bottom center;
+}
+
+#capsule-bottom {
+  bottom: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  transform-origin: top center;
+}
+
+.open-top {
+  transform: translate(-50%, -80px) rotate(-20deg);
+}
+
+.open-bottom {
+  transform: translate(-50%, 80px) rotate(20deg);
+}
+
+#item-popup {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.5s ease;
+  margin-top: 100px;
+}
+
+.item-reveal {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
 button {
   padding: 15px 30px;
   font-size: 18px;
@@ -52,7 +92,6 @@ button:hover {
   transform: scale(1.05);
 }
 
-/* 結果表示 */
 #result {
   margin-top: 30px;
 }
@@ -75,9 +114,8 @@ button:hover {
   color: #333;
 }
 
-/* 進行バー */
 #progress-bar-container {
-  width: 50%;
+  width: 33.3%;
   height: 10px;
   background-color: #ddd;
   margin: 20px auto;
@@ -97,4 +135,3 @@ button:hover {
   from { width: 0%; }
   to   { width: 100%; }
 }
-
