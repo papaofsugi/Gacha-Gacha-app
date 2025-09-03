@@ -25,9 +25,9 @@ function parseCSV(text) {
   return result;
 }
 
-function getThreeItems() {
-  const shuffled = [...items].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, 3);
+function getOneItem() {
+  const index = Math.floor(Math.random() * items.length);
+  return items[index];
 }
 
 function getCapsuleImage(rarity) {
