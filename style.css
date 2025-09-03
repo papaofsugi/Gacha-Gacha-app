@@ -15,7 +15,7 @@ input[type="file"] {
 }
 
 #capsule {
-  width: 300px; /* ← ここを調整 */
+  width: 800px; /* ← ここを調整 */
   transition: transform 0.5s ease;
 }
 
@@ -69,5 +69,6 @@ button:hover {
 .rarity.SR  { color: green; }
 .rarity.R   { color: orange; }
 .rarity.N   { color: blue; }
+
 
 
