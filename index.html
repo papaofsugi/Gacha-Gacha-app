@@ -1,27 +1,41 @@
-<header>
-  <h1>🎁 ガチャガチャを回そう！</h1>
-</header>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>ガチャガチャアプリ</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>🎁 ガチャガチャを回そう！</h1>
+  </header>
 
-<main>
-  <!-- CSV読み込み -->
-  <section id="csv-loader">
-    <input type="file" id="csvInput" accept=".csv">
-  </section>
+  <main>
+    <section id="csv-loader">
+      <input type="file" id="csvInput" accept=".csv">
+    </section>
 
-  <!-- ガチャ筐体と演出 -->
-  <section id="capsule-container">
-    <img id="capsule" src="assets/gachapon_machine.png" alt="筐体画像">
-    <div id="item-popup"></div>
-  </section>
+    <section id="capsule-container">
+      <img id="capsule" src="assets/gachapon_machine.png" alt="ガチャ筐体画像">
+      <div id="item-popup" class="hidden"></div>
+    </section>
 
-  <!-- プログレスバー -->
-  <section id="progress-bar-container"></section>
+    <section id="progress-bar-container"></section>
 
-  <!-- ガチャボタン -->
-  <section id="button-area">
-    <button id="gacha-button">ガチャを回す</button>
-  </section>
+    <section id="button-area">
+      <button id="gacha-button">ガチャを回す</button>
+    </section>
 
-  <!-- 結果表示 -->
-  <section id="result"></section>
-</main>
+    <section id="result"></section>
+
+    <section id="history">
+      <h2>履歴</h2>
+      <ul id="history-list"></ul>
+    </section>
+
+    <audio id="gacha-sound" src="assets/gacha.mp3" preload="auto"></audio>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
