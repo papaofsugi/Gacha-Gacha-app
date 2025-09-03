@@ -1,3 +1,5 @@
+console.log("🚀 Gacha-Gacha App - Version 2025-09-04-v1 loaded");
+
 // ...（前半はそのまま）
 
 function revealItem(result, popup, resultContainer) {
