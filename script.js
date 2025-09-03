@@ -41,20 +41,13 @@ function getCapsuleImage(rarity) {
 }
 
 document.getElementById("gacha-button").addEventListener("click", () => {
-  alert("ボタンが押されました！");
-});
-
-document.getElementById("gacha-button").addEventListener("click", () => {
   if (items.length === 0) {
     alert("CSVを読み込んでください！");
     return;
   }
 
   const result = getOneItem();
-  const body = document.body;
   const capsuleImg = document.getElementById("capsule");
-  const capsuleTop = document.getElementById("capsule-top");
-  const capsuleBottom = document.getElementById("capsule-bottom");
   const itemPopup = document.getElementById("item-popup");
   const resultContainer = document.getElementById("result");
   const progressContainer = document.getElementById("progress-bar-container");
@@ -65,19 +58,15 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   gachaButton.style.opacity = "0.5";
   gachaButton.style.pointerEvents = "none";
 
-  // 初期表示切り替え
+  // 初期状態リセット
   capsuleImg.style.display = "block";
-  capsuleTop.classList.add("hidden");
-  capsuleBottom.classList.add("hidden");
-  capsuleTop.classList.remove("open-top");
-  capsuleBottom.classList.remove("open-bottom");
   itemPopup.classList.remove("item-reveal");
   itemPopup.innerHTML = "";
   progressContainer.innerHTML = "";
   progressContainer.style.visibility = "visible";
 
   // 光演出スタート
-  body.classList.add("glow");
+  document.body.classList.add("glow");
 
   // 進行バー表示
   progressContainer.innerHTML = '<div id="progress-bar"></div>';
@@ -98,19 +87,11 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   // 5秒後に結果確定
   setTimeout(() => {
     clearInterval(interval);
-    body.classList.remove("glow");
+    document.body.classList.remove("glow");
     progressContainer.style.visibility = "hidden";
 
     // 抽選結果に応じた画像を表示
     capsuleImg.src = getCapsuleImage(result.rarity);
-
-    // 0.5秒後に分割カプセル表示＆蓋開き
-    setTimeout(() => {
-      capsuleImg.style.display = "none";
-      capsuleTop.classList.remove("hidden");
-      capsuleBottom.classList.remove("hidden");
-      capsuleTop.classList.add("open-top");
-    }, 500);
 
     // アイテム表示
     itemPopup.innerHTML = `<span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>`;
