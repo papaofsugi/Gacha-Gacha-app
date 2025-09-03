@@ -105,14 +105,12 @@ document.getElementById("gacha-button").addEventListener("click", () => {
     // 抽選結果に応じた画像を表示
     capsuleImg.src = getCapsuleImage(result.rarity);
 
-    // 0.5秒後に分割カプセル表示＆蓋開き
-    setTimeout(() => {
-      capsuleImg.style.display = "none";
-      capsuleTop.classList.remove("hidden");
-      capsuleBottom.classList.remove("hidden");
-      capsuleTop.style.backgroundColor = ""; // 色は画像で表現済みなので不要
-      capsuleBottom.style.backgroundColor = "";
-      capsuleTop.classList.add("open-top");
+  // 0.5秒後に分割カプセル表示＆蓋開き
+  setTimeout(() => {
+    capsuleImg.style.display = "none"; // 画像カプセルを非表示
+    capsuleTop.classList.remove("hidden");
+    capsuleBottom.classList.remove("hidden");
+    capsuleTop.classList.add("open-top");
     }, 500);
 
     // アイテム表示
