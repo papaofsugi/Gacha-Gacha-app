@@ -64,3 +64,8 @@ button:hover {
 .name {
   color: #333;
 }
+
+.rarity.SSR { color: red; }
+.rarity.SR  { color: green; }
+.rarity.R   { color: orange; }
+.rarity.N   { color: blue; }
