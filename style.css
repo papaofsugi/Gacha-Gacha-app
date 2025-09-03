@@ -1,25 +1,46 @@
+/* 全体のレイアウトと背景 */
 body {
   font-family: sans-serif;
   text-align: center;
   background-color: #f0f8ff;
   padding: 50px;
+  transition: background 0.5s ease;
 }
 
+/* キラキラ演出用クラス */
+body.sparkle {
+  background-image: radial-gradient(circle, #fff 1px, transparent 1px),
+                    radial-gradient(circle, #ff0 1px, transparent 1px),
+                    radial-gradient(circle, #f0f 1px, transparent 1px);
+  background-size: 20px 20px;
+  animation: sparkle 1s linear infinite;
+}
+
+@keyframes sparkle {
+  0%   { background-position: 0 0, 10px 10px, 5px 5px; }
+  50%  { background-position: 10px 10px, 0 0, 15px 15px; }
+  100% { background-position: 0 0, 10px 10px, 5px 5px; }
+}
+
+/* CSVファイル選択 */
 input[type="file"] {
   margin-bottom: 20px;
 }
 
+/* カプセル表示エリア */
 #capsule-container {
   margin: 40px auto;
   height: auto;
 }
 
+/* カプセル画像（レスポンシブ対応） */
 #capsule {
-  width: 5vw;            /* 画面幅の5%でレスポンシブ対応 */
-  max-width: 200px;       /* 最大サイズを制限 */
+  width: 8vw;
+  max-width: 200px;
   transition: transform 0.5s ease;
 }
 
+/* 回転アニメーション */
 .spin {
   animation: spin 1s linear infinite;
 }
@@ -29,6 +50,7 @@ input[type="file"] {
   to   { transform: rotate(360deg); }
 }
 
+/* ガチャボタン */
 button {
   padding: 15px 30px;
   font-size: 18px;
@@ -44,15 +66,18 @@ button:hover {
   transform: scale(1.05);
 }
 
+/* 結果表示エリア */
 #result {
   margin-top: 30px;
 }
 
+/* アイテム表示 */
 .item {
   margin: 10px 0;
   font-size: 20px;
 }
 
+/* レア度の色分け */
 .rarity {
   font-weight: bold;
 }
@@ -65,19 +90,3 @@ button:hover {
 .name {
   color: #333;
 }
-
-body.sparkle {
-  background-image: radial-gradient(circle, #fff 1px, transparent 1px),
-                    radial-gradient(circle, #ff0 1px, transparent 1px),
-                    radial-gradient(circle, #f0f 1px, transparent 1px);
-  background-size: 20px 20px;
-  animation: sparkle 1s linear infinite;
-}
-
-@keyframes sparkle {
-  0% { background-position: 0 0, 10px 10px, 5px 5px; }
-  50% { background-position: 10px 10px, 0 0, 15px 15px; }
-  100% { background-position: 0 0, 10px 10px, 5px 5px; }
-}
-
-
