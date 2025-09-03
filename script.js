@@ -16,11 +16,7 @@ document.getElementById("csvInput").addEventListener("change", function (e) {
 function parseCSV(text) {
   const lines = text.trim().split(/\r?\n/);
   const result = [];
-
-  const hasHeader = lines[0].includes("name") || lines[0].includes("rarity");
-  const startIndex = hasHeader ? 1 : 0;
-
-  for (let i = startIndex; i < lines.length; i++) {
+  for (let i = 1; i < lines.length; i++) {
     const [name, rarity] = lines[i].split(",");
     if (name && rarity) {
       result.push({ name: name.trim(), rarity: rarity.trim() });
@@ -59,12 +55,13 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const resultContainer = document.getElementById("result");
   const progressContainer = document.getElementById("progress-bar-container");
 
-  // 状態リセット
+  // 初期状態リセット
   capsuleImg.style.display = "none";
   capsuleTop.classList.remove("hidden", "open-top");
   capsuleBottom.classList.remove("hidden", "open-bottom");
   itemPopup.classList.remove("item-reveal");
   itemPopup.innerHTML = "";
+  resultContainer.innerHTML = "";
   progressContainer.innerHTML = "";
   progressContainer.style.visibility = "visible";
 
@@ -74,14 +71,14 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   // 進行バー表示
   progressContainer.innerHTML = '<div id="progress-bar"></div>';
 
-  // カプセル高速切り替え（0.05秒）
+  // カプセル高速切り替え（0.02秒）
   const capsuleColors = ["#ff6666", "#66cc66", "#ffcc00", "#6699ff"];
   let index = 0;
   const interval = setInterval(() => {
     capsuleTop.style.backgroundColor = capsuleColors[index];
     capsuleBottom.style.backgroundColor = capsuleColors[index];
     index = (index + 1) % capsuleColors.length;
-  }, 50);
+  }, 20); // ← 0.02秒間隔
 
   // 5秒後に演出終了＆結果表示
   setTimeout(() => {
@@ -93,17 +90,14 @@ document.getElementById("gacha-button").addEventListener("click", () => {
     capsuleTop.style.backgroundColor = finalColor;
     capsuleBottom.style.backgroundColor = finalColor;
 
-    capsuleTop.classList.add("open-top");
-    capsuleBottom.classList.add("open-bottom");
+    // カプセルの蓋を開く
+    setTimeout(() => {
+      capsuleTop.classList.add("open-top");
+    }, 500); // ← 少し遅らせて開く演出
 
+    // アイテム表示
     itemPopup.innerHTML = `<span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>`;
     itemPopup.classList.add("item-reveal");
-
-    // 抽選履歴を追加
-    const history = document.createElement("div");
-    history.className = "item";
-    history.innerHTML = `<span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>`;
-    resultContainer.appendChild(history);
 
     if (result.rarity === "SSR") {
       alert("🎉超激レアSSRが出た！");
