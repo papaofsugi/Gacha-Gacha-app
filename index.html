@@ -8,22 +8,32 @@
 <body>
   <h1>🎁 ガチャガチャを回そう！</h1>
 
+  <!-- CSV読み込み -->
   <input type="file" id="csvInput" accept=".csv">
 
-  <!-- 初期表示：ガチャ筐体画像 -->
+  <!-- カプセル演出領域 -->
   <div id="capsule-container">
-    <img id="capsule" src="gachapon_machine.png" alt="ガチャガチャ">
+    <!-- 初期表示：筐体画像 -->
+    <img id="capsule" src="assets/gachapon_machine.png" alt="ガチャガチャ">
+
+    <!-- 抽選時に表示されるカプセルパーツ -->
     <div id="capsule-top" class="capsule-part hidden"></div>
     <div id="capsule-bottom" class="capsule-part hidden"></div>
+
+    <!-- アイテム表示ポップアップ -->
     <div id="item-popup"></div>
   </div>
 
+  <!-- 抽選進行バー -->
   <div id="progress-bar-container"></div>
 
+  <!-- 抽選ボタン -->
   <button id="gacha-button">ガチャを回す</button>
 
+  <!-- 抽選履歴 -->
   <div id="result"></div>
 
+  <!-- スクリプト読み込み -->
   <script src="script.js"></script>
 </body>
 </html>
