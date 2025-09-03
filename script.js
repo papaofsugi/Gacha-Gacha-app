@@ -74,7 +74,6 @@ document.getElementById("gacha-button").addEventListener("click", () => {
     itemPopup.innerHTML = `<span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>`;
     itemPopup.classList.add("item-reveal");
 
-    // 結果テキスト表示（任意）
     resultContainer.innerHTML = "";
 
     if (result.rarity === "SSR") {
