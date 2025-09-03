@@ -32,10 +32,11 @@ function getThreeItems() {
 
 function getCapsuleImage(rarity) {
   switch (rarity) {
-    case "SSR": return "capsule_gold.png";
-    case "SR":  return "capsule_purple.png";
-    case "R":   return "capsule_blue.png";
-    default:    return "capsule_red.png";
+    case "SSR": return "capsule_ssr_red.png";
+    case "SR":  return "capsule_sr_green.png";
+    case "R":   return "capsule_r_yellow.png";
+    case "N":   return "capsule_n_blue.png";
+    default:    return "capsule_n_blue.png";
   }
 }
 
