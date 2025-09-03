@@ -30,13 +30,13 @@ function getOneItem() {
   return items[index];
 }
 
-function getCapsuleColor(rarity) {
+function getCapsuleImage(rarity) {
   switch (rarity) {
-    case "SSR": return "#ff6666";
-    case "SR":  return "#66cc66";
-    case "R":   return "#ffcc00";
-    case "N":   return "#6699ff";
-    default:    return "#cccccc";
+    case "SSR": return "assets/capsule_ssr_red.png";
+    case "SR":  return "assets/capsule_sr_green.png";
+    case "R":   return "assets/capsule_r_yellow.png";
+    case "N":   return "assets/capsule_n_blue.png";
+    default:    return "assets/capsule_n_blue.png";
   }
 }
 
@@ -56,15 +56,17 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const progressContainer = document.getElementById("progress-bar-container");
   const gachaButton = document.getElementById("gacha-button");
 
-  // ボタン無効化＆視覚的に非アクティブ化
+  // ボタン無効化
   gachaButton.disabled = true;
   gachaButton.style.opacity = "0.5";
   gachaButton.style.pointerEvents = "none";
 
   // 初期表示切り替え
-  capsuleImg.style.display = "none";
-  capsuleTop.classList.remove("hidden", "open-top");
-  capsuleBottom.classList.remove("hidden", "open-bottom");
+  capsuleImg.style.display = "block";
+  capsuleTop.classList.add("hidden");
+  capsuleBottom.classList.add("hidden");
+  capsuleTop.classList.remove("open-top");
+  capsuleBottom.classList.remove("open-bottom");
   itemPopup.classList.remove("item-reveal");
   itemPopup.innerHTML = "";
   progressContainer.innerHTML = "";
@@ -76,13 +78,17 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   // 進行バー表示
   progressContainer.innerHTML = '<div id="progress-bar"></div>';
 
-  // カプセル色高速切り替え（0.02秒）
-  const capsuleColors = ["#ff6666", "#66cc66", "#ffcc00", "#6699ff"];
-  let index = 0;
+  // カプセル画像高速切り替え（0.02秒）
+  const capsuleImages = [
+    "assets/capsule_ssr_red.png",
+    "assets/capsule_sr_green.png",
+    "assets/capsule_r_yellow.png",
+    "assets/capsule_n_blue.png"
+  ];
+  let imgIndex = 0;
   const interval = setInterval(() => {
-    capsuleTop.style.backgroundColor = capsuleColors[index];
-    capsuleBottom.style.backgroundColor = capsuleColors[index];
-    index = (index + 1) % capsuleColors.length;
+    capsuleImg.src = capsuleImages[imgIndex];
+    imgIndex = (imgIndex + 1) % capsuleImages.length;
   }, 20);
 
   // 5秒後に結果確定
@@ -91,12 +97,16 @@ document.getElementById("gacha-button").addEventListener("click", () => {
     body.classList.remove("glow");
     progressContainer.style.visibility = "hidden";
 
-    const finalColor = getCapsuleColor(result.rarity);
-    capsuleTop.style.backgroundColor = finalColor;
-    capsuleBottom.style.backgroundColor = finalColor;
+    // 抽選結果に応じた画像を表示
+    capsuleImg.src = getCapsuleImage(result.rarity);
 
-    // 蓋を開く（0.5秒後）
+    // 0.5秒後に分割カプセル表示＆蓋開き
     setTimeout(() => {
+      capsuleImg.style.display = "none";
+      capsuleTop.classList.remove("hidden");
+      capsuleBottom.classList.remove("hidden");
+      capsuleTop.style.backgroundColor = ""; // 色は画像で表現済みなので不要
+      capsuleBottom.style.backgroundColor = "";
       capsuleTop.classList.add("open-top");
     }, 500);
 
