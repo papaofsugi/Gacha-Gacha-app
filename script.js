@@ -1,116 +1,115 @@
-let items = [];
-
-document.getElementById("csvInput").addEventListener("change", function (e) {
-  const file = e.target.files[0];
-  if (!file) return;
-
-  const reader = new FileReader();
-  reader.onload = function (event) {
-    const text = event.target.result;
-    items = parseCSV(text);
-    alert(`CSV読み込み完了！アイテム数：${items.length}`);
-  };
-  reader.readAsText(file);
-});
-
-function parseCSV(text) {
-  const lines = text.trim().split(/\r?\n/);
-  const result = [];
-  for (let i = 1; i < lines.length; i++) {
-    const [name, rarity] = lines[i].split(",");
-    if (name && rarity) {
-      result.push({ name: name.trim(), rarity: rarity.trim() });
-    }
-  }
-  return result;
+body {
+  font-family: sans-serif;
+  text-align: center;
+  background-color: #f0f8ff;
+  padding: 50px;
+  transition: background 0.5s ease;
 }
 
-function getOneItem() {
-  const index = Math.floor(Math.random() * items.length);
-  return items[index];
+body.glow {
+  background: linear-gradient(135deg, #fffacd, #f0f8ff);
+  background-size: 400% 400%;
+  animation: glow 2s ease-in-out infinite;
 }
 
-function getCapsuleImage(rarity) {
-  switch (rarity) {
-    case "SSR": return "assets/capsule_ssr_red.png";
-    case "SR":  return "assets/capsule_sr_green.png";
-    case "R":   return "assets/capsule_r_yellow.png";
-    case "N":   return "assets/capsule_n_blue.png";
-    default:    return "assets/capsule_n_blue.png";
-  }
+@keyframes glow {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
-document.getElementById("gacha-button").addEventListener("click", () => {
-  if (items.length === 0) {
-    alert("CSVを読み込んでください！");
-    return;
-  }
+input[type="file"] {
+  margin-bottom: 20px;
+}
 
-  const result = getOneItem();
-  const capsuleImg = document.getElementById("capsule");
-  const itemPopup = document.getElementById("item-popup");
-  const resultContainer = document.getElementById("result");
-  const progressContainer = document.getElementById("progress-bar-container");
-  const gachaButton = document.getElementById("gacha-button");
+#capsule-container {
+  margin: 40px auto;
+  position: relative;
+  height: 200px;
+}
 
-  // ボタン無効化
-  gachaButton.disabled = true;
-  gachaButton.style.opacity = "0.5";
-  gachaButton.style.pointerEvents = "none";
+#capsule {
+  width: 150px;
+  max-width: 300px;
+  transition: transform 0.5s ease;
+  z-index: 2;
+}
 
-  // 初期状態リセット
-  capsuleImg.style.display = "block";
-  itemPopup.classList.remove("item-reveal");
-  itemPopup.innerHTML = "";
-  progressContainer.innerHTML = "";
-  progressContainer.style.visibility = "visible";
+#item-popup {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all 0.5s ease;
+  margin-top: 100px;
+  z-index: 3;
+  position: relative;
+}
 
-  // 光演出スタート
-  document.body.classList.add("glow");
+.item-reveal {
+  opacity: 1;
+  transform: scale(1.2);
+}
 
-  // 進行バー表示
-  progressContainer.innerHTML = '<div id="progress-bar"></div>';
+#gacha-button {
+  margin-top: 20px;
+  padding: 15px 30px;
+  font-size: 18px;
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
+  position: relative;
+  z-index: 10;
+}
 
-  // カプセル画像高速切り替え（0.02秒）
-  const capsuleImages = [
-    "assets/capsule_ssr_red.png",
-    "assets/capsule_sr_green.png",
-    "assets/capsule_r_yellow.png",
-    "assets/capsule_n_blue.png"
-  ];
-  let imgIndex = 0;
-  const interval = setInterval(() => {
-    capsuleImg.src = capsuleImages[imgIndex];
-    imgIndex = (imgIndex + 1) % capsuleImages.length;
-  }, 20);
+#gacha-button:hover {
+  transform: scale(1.05);
+}
 
-  // 5秒後に結果確定
-  setTimeout(() => {
-    clearInterval(interval);
-    document.body.classList.remove("glow");
-    progressContainer.style.visibility = "hidden";
+#result {
+  margin-top: 30px;
+}
 
-    // 抽選結果に応じた画像を表示
-    capsuleImg.src = getCapsuleImage(result.rarity);
+.item {
+  margin: 10px 0;
+  font-size: 20px;
+}
 
-    // アイテム表示
-    itemPopup.innerHTML = `<span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>`;
-    itemPopup.classList.add("item-reveal");
+.rarity {
+  font-weight: bold;
+}
 
-    // 抽選履歴追加
-    const history = document.createElement("div");
-    history.className = "item";
-    history.innerHTML = itemPopup.innerHTML;
-    resultContainer.appendChild(history);
+.rarity.SSR { color: red; }
+.rarity.SR  { color: green; }
+.rarity.R   { color: orange; }
+.rarity.N   { color: blue; }
 
-    // SSR演出
-    if (result.rarity === "SSR") {
-      alert("🎉超激レアSSRが出た！");
-    }
+.name {
+  color: #333;
+}
 
-    // ボタン再表示
-    gachaButton.disabled = false;
-    gachaButton.style.opacity = "1";
-    gachaButton.style.pointerEvents = "auto";
-  }, 5000);
-});
+#progress-bar-container {
+  width: 66.6%;
+  height: 10px;
+  background-color: #ddd;
+  margin: 20px auto;
+  border-radius: 5px;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #ff69b4;
+  animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
