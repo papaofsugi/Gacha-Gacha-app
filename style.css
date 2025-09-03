@@ -6,7 +6,7 @@ body {
   transition: background 0.5s ease;
 }
 
-/* 光の演出（背景グラデーション） */
+/* 光演出 */
 body.glow {
   background: linear-gradient(135deg, #fffacd, #f0f8ff);
   background-size: 400% 400%;
@@ -57,7 +57,6 @@ button:hover {
   margin-top: 30px;
 }
 
-/* アイテム表示 */
 .item {
   margin: 10px 0;
   font-size: 20px;
