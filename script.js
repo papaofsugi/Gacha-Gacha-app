@@ -60,6 +60,7 @@ document.getElementById("gacha-button").addEventListener("click", () => {
 
   // 初期状態リセット
   capsuleImg.style.display = "block";
+  capsuleImg.src = "assets/capsule_n_blue.png"; // 一旦カプセル画像に切り替え
   itemPopup.classList.remove("item-reveal");
   itemPopup.innerHTML = "";
   progressContainer.innerHTML = "";
