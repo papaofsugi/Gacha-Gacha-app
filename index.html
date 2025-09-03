@@ -1,28 +1,27 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>ガチャガチャアプリ</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+<header>
   <h1>🎁 ガチャガチャを回そう！</h1>
+</header>
 
-  <input type="file" id="csvInput" accept=".csv">
+<main>
+  <!-- CSV読み込み -->
+  <section id="csv-loader">
+    <input type="file" id="csvInput" accept=".csv">
+  </section>
 
-  <div id="capsule-container">
+  <!-- ガチャ筐体と演出 -->
+  <section id="capsule-container">
     <img id="capsule" src="assets/gachapon_machine.png" alt="筐体画像">
     <div id="item-popup"></div>
-  </div>
+  </section>
 
-  <div id="progress-bar-container"></div>
+  <!-- プログレスバー -->
+  <section id="progress-bar-container"></section>
 
-  <div id="button-area">
+  <!-- ガチャボタン -->
+  <section id="button-area">
     <button id="gacha-button">ガチャを回す</button>
-  </div>
+  </section>
 
-  <div id="result"></div>
-
-  <script src="script.js"></script>
-</body>
-</html>
+  <!-- 結果表示 -->
+  <section id="result"></section>
+</main>
