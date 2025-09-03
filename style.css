@@ -1,4 +1,3 @@
-/* 全体レイアウト */
 body {
   font-family: sans-serif;
   text-align: center;
@@ -7,7 +6,6 @@ body {
   transition: background 0.5s ease;
 }
 
-/* 光演出 */
 body.glow {
   background: linear-gradient(135deg, #fffacd, #f0f8ff);
   background-size: 400% 400%;
@@ -20,19 +18,16 @@ body.glow {
   100% { background-position: 0% 50%; }
 }
 
-/* CSV入力 */
 input[type="file"] {
   margin-bottom: 20px;
 }
 
-/* カプセル演出領域 */
 #capsule-container {
   margin: 40px auto 20px;
   position: relative;
   height: auto;
 }
 
-/* カプセル画像 */
 #capsule {
   width: 150px;
   max-width: 300px;
@@ -40,7 +35,6 @@ input[type="file"] {
   z-index: 2;
 }
 
-/* アイテム表示ポップアップ */
 #item-popup {
   font-size: 24px;
   font-weight: bold;
@@ -48,4 +42,67 @@ input[type="file"] {
   opacity: 0;
   transform: scale(0.5);
   transition: all 0.5s ease;
-  margin-top: 30
+  margin-top: 30px;
+  z-index: 3;
+  position: relative;
+}
+
+.item-reveal {
+  opacity: 1;
+  transform: scale(1.2);
+}
+
+#button-area {
+  margin-top: 30px;
+}
+
+#gacha-button {
+  width: 200px;
+  display: block;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+#result {
+  margin-top: 40px;
+}
+
+.item {
+  margin: 10px 0;
+  font-size: 20px;
+}
+
+.rarity {
+  font-weight: bold;
+}
+
+.rarity.SSR { color: red; }
+.rarity.SR  { color: green; }
+.rarity.R   { color: orange; }
+.rarity.N   { color: blue; }
+
+.name {
+  color: #333;
+}
+
+#progress-bar-container {
+  width: 66.6%;
+  height: 10px;
+  background-color: #ddd;
+  margin: 20px auto;
+  border-radius: 5px;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #ff69b4;
+  animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+  from { width: 0%; }
+  to   { width: 100%; }
+}
