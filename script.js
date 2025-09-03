@@ -53,7 +53,7 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const progressContainer = document.getElementById("progress-bar-container");
   const gachaButton = document.getElementById("gacha-button");
 
-  // ボタン無効化（見た目だけ）
+  // ボタン無効化
   gachaButton.style.opacity = "0.5";
   gachaButton.style.pointerEvents = "none";
 
