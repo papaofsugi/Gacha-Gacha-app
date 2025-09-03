@@ -44,3 +44,9 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   }).join("");
   document.getElementById("result").innerHTML = resultHTML;
 });
+
+const resultHTML = results.map(item => {
+  return `<div class="item">
+            <span class="rarity ${item.rarity}">${item.rarity}</span>：<span class="name">${item.name}</span>
+          </div>`;
+}).join("");
