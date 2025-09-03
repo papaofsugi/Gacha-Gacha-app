@@ -54,6 +54,7 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const gachaButton = document.getElementById("gacha-button");
 
   // ボタン無効化
+  gachaButton.disabled = true;
   gachaButton.style.opacity = "0.5";
   gachaButton.style.pointerEvents = "none";
 
@@ -108,6 +109,7 @@ document.getElementById("gacha-button").addEventListener("click", () => {
     }
 
     // ボタン再表示
+    gachaButton.disabled = false;
     gachaButton.style.opacity = "1";
     gachaButton.style.pointerEvents = "auto";
   }, 5000);
