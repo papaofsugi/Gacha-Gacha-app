@@ -68,7 +68,7 @@ input[type="file"] {
 
 #gacha-button {
   position: fixed;
-  bottom: 120px;        /* 画面下からの距離 */
+  bottom: 1200px;        /* 画面下からの距離 */
   left: 50%;           /* 横中央に配置 */
   transform: translateX(-50%); /* 中央揃え補正 */
   padding: 15px 30px;
@@ -83,7 +83,7 @@ input[type="file"] {
 }
 
 #gacha-button:hover {
-  transform: scale(1.05);
+  transform: scale(1.5);
 }
 
 /* 抽選履歴 */
@@ -131,6 +131,7 @@ input[type="file"] {
   from { width: 0%; }
   to   { width: 100%; }
 }
+
 
 
 
