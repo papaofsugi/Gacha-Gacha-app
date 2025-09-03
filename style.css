@@ -9,6 +9,25 @@ input[type="file"] {
   margin-bottom: 20px;
 }
 
+#capsule-container {
+  margin: 30px auto;
+  height: 120px;
+}
+
+#capsule {
+  width: 100px;
+  transition: transform 0.5s ease;
+}
+
+.spin {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
 button {
   padding: 15px 30px;
   font-size: 18px;
@@ -35,11 +54,6 @@ button:hover {
 
 .rarity {
   font-weight: bold;
-  color: #ff4500;
-}
-
-.name {
-  color: #333;
 }
 
 .rarity.SSR { color: gold; }
@@ -47,12 +61,6 @@ button:hover {
 .rarity.R   { color: blue; }
 .rarity.N   { color: gray; }
 
-.item {
-  animation: fadeIn 0.5s ease;
+.name {
+  color: #333;
 }
-
-@keyframes fadeIn {
-  from { opacity: 0; transform: scale(0.8); }
-  to   { opacity: 1; transform: scale(1); }
-}
-
