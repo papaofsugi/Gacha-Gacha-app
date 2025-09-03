@@ -67,6 +67,10 @@ input[type="file"] {
 }
 
 #gacha-button {
+  position: fixed;
+  bottom: 40px;        /* 画面下からの距離 */
+  left: 50%;           /* 横中央に配置 */
+  transform: translateX(-50%); /* 中央揃え補正 */
   padding: 15px 30px;
   font-size: 18px;
   background-color: #ff69b4;
@@ -75,8 +79,7 @@ input[type="file"] {
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.2s;
-  display: block;
-  margin: 0 auto;
+  z-index: 1000;       /* 他の要素より前面に表示 */
 }
 
 #gacha-button:hover {
@@ -128,5 +131,6 @@ input[type="file"] {
   from { width: 0%; }
   to   { width: 100%; }
 }
+
 
 
