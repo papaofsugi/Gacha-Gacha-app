@@ -53,26 +53,20 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const progressContainer = document.getElementById("progress-bar-container");
   const gachaButton = document.getElementById("gacha-button");
 
-  // ボタン無効化
   gachaButton.disabled = true;
   gachaButton.style.opacity = "0.5";
   gachaButton.style.pointerEvents = "none";
 
-  // 初期状態リセット
   capsuleImg.style.display = "block";
-  capsuleImg.src = "assets/capsule_n_blue.png"; // 一旦カプセル画像に切り替え
+  capsuleImg.src = "assets/capsule_n_blue.png";
   itemPopup.classList.remove("item-reveal");
   itemPopup.innerHTML = "";
   progressContainer.innerHTML = "";
   progressContainer.style.visibility = "visible";
 
-  // 光演出スタート
   document.body.classList.add("glow");
-
-  // 進行バー表示
   progressContainer.innerHTML = '<div id="progress-bar"></div>';
 
-  // カプセル画像高速切り替え（0.02秒）
   const capsuleImages = [
     "assets/capsule_ssr_red.png",
     "assets/capsule_sr_green.png",
@@ -83,33 +77,27 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const interval = setInterval(() => {
     capsuleImg.src = capsuleImages[imgIndex];
     imgIndex = (imgIndex + 1) % capsuleImages.length;
-  }, 20);
+  }, 50); // 少しゆっくりに調整
 
-  // 5秒後に結果確定
   setTimeout(() => {
     clearInterval(interval);
     document.body.classList.remove("glow");
     progressContainer.style.visibility = "hidden";
 
-    // 抽選結果に応じた画像を表示
     capsuleImg.src = getCapsuleImage(result.rarity);
 
-    // アイテム表示
     itemPopup.innerHTML = `<span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>`;
     itemPopup.classList.add("item-reveal");
 
-    // 抽選履歴追加
     const history = document.createElement("div");
     history.className = "item";
     history.innerHTML = itemPopup.innerHTML;
     resultContainer.appendChild(history);
 
-    // SSR演出
     if (result.rarity === "SSR") {
       alert("🎉超激レアSSRが出た！");
     }
 
-    // ボタン再表示
     gachaButton.disabled = false;
     gachaButton.style.opacity = "1";
     gachaButton.style.pointerEvents = "auto";
