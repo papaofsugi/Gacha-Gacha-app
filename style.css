@@ -28,16 +28,27 @@ input[type="file"] {
   height: 200px;
 }
 
+#capsule {
+  width: 30vw;
+  max-width: 300px;
+  transition: transform 0.5s ease;
+  z-index: 1;
+}
+
 .capsule-part {
   width: 150px;
   height: 75px;
   background-color: #ff6666;
-  margin: 0 auto;
   border-radius: 75px;
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
   transition: transform 0.5s ease;
+  z-index: 2;
+}
+
+.hidden {
+  display: none;
 }
 
 #capsule-top {
@@ -70,6 +81,8 @@ input[type="file"] {
   transform: scale(0.5);
   transition: all 0.5s ease;
   margin-top: 100px;
+  z-index: 3;
+  position: relative;
 }
 
 .item-reveal {
