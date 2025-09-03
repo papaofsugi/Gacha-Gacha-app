@@ -46,3 +46,13 @@ button:hover {
 .rarity.SR  { color: purple; }
 .rarity.R   { color: blue; }
 .rarity.N   { color: gray; }
+
+.item {
+  animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
