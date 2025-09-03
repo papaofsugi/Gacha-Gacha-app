@@ -54,8 +54,13 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const itemPopup = document.getElementById("item-popup");
   const resultContainer = document.getElementById("result");
   const progressContainer = document.getElementById("progress-bar-container");
+  const gachaButton = document.getElementById("gacha-button");
 
-  // 初期状態リセット
+  // ボタン無効化
+  gachaButton.disabled = true;
+  gachaButton.style.opacity = "0.5";
+
+  // 初期表示切り替え
   capsuleImg.style.display = "none";
   capsuleTop.classList.remove("hidden", "open-top");
   capsuleBottom.classList.remove("hidden", "open-bottom");
@@ -71,16 +76,16 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   // 進行バー表示
   progressContainer.innerHTML = '<div id="progress-bar"></div>';
 
-  // カプセル高速切り替え（0.02秒）
+  // カプセル色高速切り替え（0.02秒）
   const capsuleColors = ["#ff6666", "#66cc66", "#ffcc00", "#6699ff"];
   let index = 0;
   const interval = setInterval(() => {
     capsuleTop.style.backgroundColor = capsuleColors[index];
     capsuleBottom.style.backgroundColor = capsuleColors[index];
     index = (index + 1) % capsuleColors.length;
-  }, 20); // ← 0.02秒間隔
+  }, 20);
 
-  // 5秒後に演出終了＆結果表示
+  // 5秒後に結果確定
   setTimeout(() => {
     clearInterval(interval);
     body.classList.remove("glow");
@@ -90,17 +95,28 @@ document.getElementById("gacha-button").addEventListener("click", () => {
     capsuleTop.style.backgroundColor = finalColor;
     capsuleBottom.style.backgroundColor = finalColor;
 
-    // カプセルの蓋を開く
+    // 蓋を開く（0.5秒後）
     setTimeout(() => {
       capsuleTop.classList.add("open-top");
-    }, 500); // ← 少し遅らせて開く演出
+    }, 500);
 
     // アイテム表示
     itemPopup.innerHTML = `<span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>`;
     itemPopup.classList.add("item-reveal");
 
+    // 抽選履歴追加
+    const history = document.createElement("div");
+    history.className = "item";
+    history.innerHTML = itemPopup.innerHTML;
+    resultContainer.appendChild(history);
+
+    // SSR演出
     if (result.rarity === "SSR") {
       alert("🎉超激レアSSRが出た！");
     }
+
+    // ボタン再表示
+    gachaButton.disabled = false;
+    gachaButton.style.opacity = "1";
   }, 5000);
 });
