@@ -50,3 +50,7 @@ const resultHTML = results.map(item => {
             <span class="rarity ${item.rarity}">${item.rarity}</span>：<span class="name">${item.name}</span>
           </div>`;
 }).join("");
+
+if (results.some(item => item.rarity === "SSR")) {
+  alert("🎉超激レアSSRが出た！");
+}
