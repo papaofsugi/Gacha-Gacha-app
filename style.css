@@ -37,6 +37,15 @@ input[type="file"] {
   z-index: 2;
 }
 
+.spin-animation {
+  animation: spin 1s ease-in-out;
+}
+
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 #item-popup {
   font-size: 24px;
   font-weight: bold;
@@ -91,10 +100,21 @@ input[type="file"] {
   font-weight: bold;
 }
 
-.rarity.SSR { color: red; }
+.rarity.SSR {
+  color: red;
+  text-shadow: 0 0 5px gold, 0 0 10px red;
+  animation: pulse 1s infinite;
+}
+
 .rarity.SR  { color: green; }
 .rarity.R   { color: orange; }
 .rarity.N   { color: blue; }
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
 
 .name {
   color: #333;
@@ -122,25 +142,15 @@ input[type="file"] {
   to   { width: 100%; }
 }
 
-@keyframes spin {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+#history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
-.spin-animation {
-  animation: spin 1s ease-in-out;
-}
-
-.rarity.SSR {
-  color: red;
-  text-shadow: 0 0 5px gold, 0 0 10px red;
-  animation: pulse 1s infinite;
-}
-
-@keyframes pulse {
-  0%   { transform: scale(1); }
-  50%  { transform: scale(1.1); }
-  100% { transform: scale(1); }
+#history-list li {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
 }
 
 @media (max-width: 600px) {
@@ -156,15 +166,4 @@ input[type="file"] {
   .item {
     font-size: 16px;
   }
-}
-
-#history-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#history-list li {
-  padding: 8px;
-  border-bottom: 1px solid #eee;
 }
