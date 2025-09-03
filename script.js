@@ -46,6 +46,11 @@ document.getElementById("gacha-button").addEventListener("click", () => {
     return;
   }
 
+  // 抽選開始時
+  capsuleImg.style.display = "block"; // 画像カプセル表示
+  capsuleTop.classList.add("hidden"); // 分割カプセル非表示
+  capsuleBottom.classList.add("hidden");
+
   const result = getOneItem();
   const body = document.body;
   const capsuleImg = document.getElementById("capsule");
