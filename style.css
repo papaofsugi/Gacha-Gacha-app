@@ -59,10 +59,20 @@ input[type="file"] {
 }
 
 #gacha-button {
-  width: 200px;
+  padding: 15px 30px;
+  font-size: 18px;
+  background-color: #ff69b4;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
   display: block;
   margin: 0 auto;
-  cursor: pointer;
+}
+
+#gacha-button:hover {
+  transform: scale(1.05);
 }
 
 #result {
