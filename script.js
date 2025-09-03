@@ -55,7 +55,7 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const resultContainer = document.getElementById("result");
   const progressContainer = document.getElementById("progress-bar-container");
 
-  // 初期画像を非表示、カプセルパーツを表示
+  // 初期表示では筐体画像のみ表示
   capsuleImg.style.display = "none";
   capsuleTop.classList.remove("hidden");
   capsuleBottom.classList.remove("hidden");
