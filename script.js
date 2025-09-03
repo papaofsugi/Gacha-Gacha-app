@@ -16,7 +16,11 @@ document.getElementById("csvInput").addEventListener("change", function (e) {
 function parseCSV(text) {
   const lines = text.trim().split(/\r?\n/);
   const result = [];
-  for (let i = 1; i < lines.length; i++) {
+
+  const hasHeader = lines[0].includes("name") || lines[0].includes("rarity");
+  const startIndex = hasHeader ? 1 : 0;
+
+  for (let i = startIndex; i < lines.length; i++) {
     const [name, rarity] = lines[i].split(",");
     if (name && rarity) {
       result.push({ name: name.trim(), rarity: rarity.trim() });
@@ -55,17 +59,20 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const resultContainer = document.getElementById("result");
   const progressContainer = document.getElementById("progress-bar-container");
 
-  // 初期表示では筐体画像のみ表示
+  // 状態リセット
   capsuleImg.style.display = "none";
-  capsuleTop.classList.remove("hidden");
-  capsuleBottom.classList.remove("hidden");
+  capsuleTop.classList.remove("hidden", "open-top");
+  capsuleBottom.classList.remove("hidden", "open-bottom");
+  itemPopup.classList.remove("item-reveal");
+  itemPopup.innerHTML = "";
+  progressContainer.innerHTML = "";
+  progressContainer.style.visibility = "visible";
 
   // 光演出スタート
   body.classList.add("glow");
 
   // 進行バー表示
   progressContainer.innerHTML = '<div id="progress-bar"></div>';
-  progressContainer.style.visibility = "visible";
 
   // カプセル高速切り替え（0.05秒）
   const capsuleColors = ["#ff6666", "#66cc66", "#ffcc00", "#6699ff"];
@@ -92,7 +99,11 @@ document.getElementById("gacha-button").addEventListener("click", () => {
     itemPopup.innerHTML = `<span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>`;
     itemPopup.classList.add("item-reveal");
 
-    resultContainer.innerHTML = "";
+    // 抽選履歴を追加
+    const history = document.createElement("div");
+    history.className = "item";
+    history.innerHTML = `<span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>`;
+    resultContainer.appendChild(history);
 
     if (result.rarity === "SSR") {
       alert("🎉超激レアSSRが出た！");
