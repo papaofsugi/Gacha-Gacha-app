@@ -55,21 +55,20 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   // 光の演出スタート
   body.classList.add("glow");
 
-  // カプセル交互表示（1秒ごとに切り替え）
-const capsuleImages = [
-  "capsule_ssr_red.png",
-  "capsule_sr_green.png",
-  "capsule_r_yellow.png",
-  "capsule_n_blue.png"
-];
-let index = 0;
-const interval = setInterval(() => {
-  console.log("切り替え中:", capsuleImages[index]); // ← コンソールに表示
-  capsule.src = capsuleImages[index];
-  index = (index + 1) % capsuleImages.length;
-}, 1000);
+  // カプセル交互表示（0.2秒ごとに切り替え）
+  const capsuleImages = [
+    "capsule_ssr_red.png",
+    "capsule_sr_green.png",
+    "capsule_r_yellow.png",
+    "capsule_n_blue.png"
+  ];
+  let index = 0;
+  const interval = setInterval(() => {
+    capsule.src = capsuleImages[index];
+    index = (index + 1) % capsuleImages.length;
+  }, 200); // ← 0.2秒間隔
 
-  // 10秒後に演出終了＆結果表示
+  // 5秒後に演出終了＆結果表示
   setTimeout(() => {
     clearInterval(interval);
     body.classList.remove("glow");
@@ -84,5 +83,5 @@ const interval = setInterval(() => {
     if (result.rarity === "SSR") {
       alert("🎉超激レアSSRが出た！");
     }
-  }, 10000);
+  }, 5000); // ← 5秒待つ
 });
