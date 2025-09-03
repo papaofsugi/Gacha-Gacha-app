@@ -121,3 +121,50 @@ input[type="file"] {
   from { width: 0%; }
   to   { width: 100%; }
 }
+
+@keyframes spin {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spin-animation {
+  animation: spin 1s ease-in-out;
+}
+
+.rarity.SSR {
+  color: red;
+  text-shadow: 0 0 5px gold, 0 0 10px red;
+  animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+  0%   { transform: scale(1); }
+  50%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+
+@media (max-width: 600px) {
+  #capsule {
+    width: 100px;
+  }
+
+  #gacha-button {
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  .item {
+    font-size: 16px;
+  }
+}
+
+#history-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#history-list li {
+  padding: 8px;
+  border-bottom: 1px solid #eee;
+}
