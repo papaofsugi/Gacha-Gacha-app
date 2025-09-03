@@ -14,7 +14,7 @@ document.getElementById("csvInput").addEventListener("change", function (e) {
 });
 
 function parseCSV(text) {
-  const lines = text.trim().split("\n");
+  const lines = text.trim().split(/\r?\n/);
   const result = [];
   for (let i = 1; i < lines.length; i++) {
     const [name, rarity] = lines[i].split(",");
