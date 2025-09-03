@@ -6,7 +6,7 @@ body {
   transition: background 0.5s ease;
 }
 
-/* 光の演出（背景がゆっくり動くグラデーション） */
+/* 光の演出（背景グラデーション） */
 body.glow {
   background: linear-gradient(135deg, #fffacd, #f0f8ff);
   background-size: 400% 400%;
@@ -19,10 +19,12 @@ body.glow {
   100% { background-position: 0% 50%; }
 }
 
+/* ファイル選択 */
 input[type="file"] {
   margin-bottom: 20px;
 }
 
+/* カプセル表示 */
 #capsule-container {
   margin: 40px auto;
   height: auto;
@@ -34,15 +36,7 @@ input[type="file"] {
   transition: transform 0.5s ease;
 }
 
-.spin {
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
-
+/* ガチャボタン */
 button {
   padding: 15px 30px;
   font-size: 18px;
@@ -58,10 +52,12 @@ button:hover {
   transform: scale(1.05);
 }
 
+/* 結果表示 */
 #result {
   margin-top: 30px;
 }
 
+/* アイテム表示 */
 .item {
   margin: 10px 0;
   font-size: 20px;
@@ -78,4 +74,27 @@ button:hover {
 
 .name {
   color: #333;
+}
+
+/* 進行バー */
+#progress-bar-container {
+  width: 80%;
+  height: 10px;
+  background-color: #ddd;
+  margin: 20px auto;
+  border-radius: 5px;
+  overflow: hidden;
+  visibility: hidden;
+}
+
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #ff69b4;
+  animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+  from { width: 0%; }
+  to   { width: 100%; }
 }
