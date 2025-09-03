@@ -18,7 +18,9 @@ function parseCSV(text) {
   const result = [];
   for (let i = 1; i < lines.length; i++) {
     const [name, rarity] = lines[i].split(",");
-    result.push({ name: name.trim(), rarity: rarity.trim() });
+    if (name && rarity) {
+      result.push({ name: name.trim(), rarity: rarity.trim() });
+    }
   }
   return result;
 }
