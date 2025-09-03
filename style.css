@@ -1,3 +1,4 @@
+/* 全体の基本スタイル */
 body {
   font-family: sans-serif;
   text-align: center;
@@ -6,6 +7,7 @@ body {
   transition: background 0.5s ease;
 }
 
+/* 光演出（抽選中） */
 body.glow {
   background: linear-gradient(135deg, #fffacd, #f0f8ff);
   background-size: 400% 400%;
@@ -18,16 +20,19 @@ body.glow {
   100% { background-position: 0% 50%; }
 }
 
+/* CSV入力 */
 input[type="file"] {
   margin-bottom: 20px;
 }
 
+/* カプセル領域 */
 #capsule-container {
   margin: 40px auto;
   position: relative;
   height: 200px;
 }
 
+/* 初期表示：筐体画像 */
 #capsule {
   width: 30vw;
   max-width: 300px;
@@ -35,6 +40,7 @@ input[type="file"] {
   z-index: 1;
 }
 
+/* カプセルパーツ（上下） */
 .capsule-part {
   width: 150px;
   height: 75px;
@@ -47,10 +53,12 @@ input[type="file"] {
   z-index: 2;
 }
 
+/* 非表示制御 */
 .hidden {
   display: none;
 }
 
+/* 上部パーツ */
 #capsule-top {
   top: 0;
   border-bottom-left-radius: 0;
@@ -58,6 +66,7 @@ input[type="file"] {
   transform-origin: bottom center;
 }
 
+/* 下部パーツ */
 #capsule-bottom {
   bottom: 0;
   border-top-left-radius: 0;
@@ -65,6 +74,7 @@ input[type="file"] {
   transform-origin: top center;
 }
 
+/* 蓋開き演出 */
 .open-top {
   transform: translate(-50%, -80px) rotate(-20deg);
 }
@@ -73,6 +83,7 @@ input[type="file"] {
   transform: translate(-50%, 80px) rotate(20deg);
 }
 
+/* アイテムポップアップ */
 #item-popup {
   font-size: 24px;
   font-weight: bold;
@@ -85,12 +96,15 @@ input[type="file"] {
   position: relative;
 }
 
+/* アイテム表示時の演出 */
 .item-reveal {
   opacity: 1;
   transform: scale(1.2);
 }
 
-button {
+/* ガチャボタン */
+#gacha-button {
+  margin-top: 20px;
   padding: 15px 30px;
   font-size: 18px;
   background-color: #ff69b4;
@@ -99,12 +113,15 @@ button {
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.2s;
+  position: relative;
+  z-index: 10;
 }
 
-button:hover {
+#gacha-button:hover {
   transform: scale(1.05);
 }
 
+/* 抽選履歴 */
 #result {
   margin-top: 30px;
 }
@@ -127,6 +144,7 @@ button:hover {
   color: #333;
 }
 
+/* 進行バー */
 #progress-bar-container {
   width: 66.6%;
   height: 10px;
@@ -147,8 +165,4 @@ button:hover {
 @keyframes progress {
   from { width: 0%; }
   to   { width: 100%; }
-}
-
-.hidden {
-  display: none;
 }
