@@ -25,9 +25,17 @@ function parseCSV(text) {
   return result;
 }
 
-function getOneItem() {
-  const index = Math.floor(Math.random() * items.length);
-  return items[index];
+function getWeightedItem() {
+  const weights = { SSR: 1, SR: 5, R: 20, N: 74 };
+  const pool = [];
+
+  items.forEach(item => {
+    const count = weights[item.rarity] || 1;
+    for (let i = 0; i < count; i++) pool.push(item);
+  });
+
+  const index = Math.floor(Math.random() * pool.length);
+  return pool[index];
 }
 
 function getCapsuleImage(rarity) {
@@ -40,32 +48,67 @@ function getCapsuleImage(rarity) {
   }
 }
 
+function disableButton(btn) {
+  btn.disabled = true;
+  btn.style.opacity = "0.5";
+  btn.style.pointerEvents = "none";
+}
+
+function enableButton(btn) {
+  btn.disabled = false;
+  btn.style.opacity = "1";
+  btn.style.pointerEvents = "auto";
+}
+
+function showProgressBar(container) {
+  container.innerHTML = '<div id="progress-bar"></div>';
+  container.style.visibility = "visible";
+}
+
+function hideProgressBar(container) {
+  container.innerHTML = "";
+  container.style.visibility = "hidden";
+}
+
+function revealItem(result, popup, resultContainer) {
+  popup.innerHTML = `<span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>`;
+  popup.classList.add("item-reveal");
+
+  const li = document.createElement("li");
+  li.innerHTML = popup.innerHTML;
+  document.getElementById("history-list")?.prepend(li);
+
+  const history = document.createElement("div");
+  history.className = "item";
+  history.innerHTML = popup.innerHTML;
+  resultContainer.appendChild(history);
+
+  if (result.rarity === "SSR") {
+    alert("🎉超激レアSSRが出た！");
+    document.body.classList.add("glow");
+    setTimeout(() => document.body.classList.remove("glow"), 1000);
+  }
+}
+
 document.getElementById("gacha-button").addEventListener("click", () => {
   if (items.length === 0) {
     alert("CSVを読み込んでください！");
     return;
   }
 
-  const result = getOneItem();
+  const result = getWeightedItem();
   const capsuleImg = document.getElementById("capsule");
   const itemPopup = document.getElementById("item-popup");
   const resultContainer = document.getElementById("result");
   const progressContainer = document.getElementById("progress-bar-container");
   const gachaButton = document.getElementById("gacha-button");
 
-  gachaButton.disabled = true;
-  gachaButton.style.opacity = "0.5";
-  gachaButton.style.pointerEvents = "none";
-
-  capsuleImg.style.display = "block";
+  disableButton(gachaButton);
+  capsuleImg.classList.add("spin-animation");
   capsuleImg.src = "assets/capsule_n_blue.png";
   itemPopup.classList.remove("item-reveal");
   itemPopup.innerHTML = "";
-  progressContainer.innerHTML = "";
-  progressContainer.style.visibility = "visible";
-
-  document.body.classList.add("glow");
-  progressContainer.innerHTML = '<div id="progress-bar"></div>';
+  showProgressBar(progressContainer);
 
   const capsuleImages = [
     "assets/capsule_ssr_red.png",
@@ -77,29 +120,17 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const interval = setInterval(() => {
     capsuleImg.src = capsuleImages[imgIndex];
     imgIndex = (imgIndex + 1) % capsuleImages.length;
-  }, 50); // 少しゆっくりに調整
+  }, 50);
+
+  const gachaSound = document.getElementById("gacha-sound");
+  gachaSound?.play();
 
   setTimeout(() => {
     clearInterval(interval);
-    document.body.classList.remove("glow");
-    progressContainer.style.visibility = "hidden";
-
+    capsuleImg.classList.remove("spin-animation");
+    hideProgressBar(progressContainer);
     capsuleImg.src = getCapsuleImage(result.rarity);
-
-    itemPopup.innerHTML = `<span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>`;
-    itemPopup.classList.add("item-reveal");
-
-    const history = document.createElement("div");
-    history.className = "item";
-    history.innerHTML = itemPopup.innerHTML;
-    resultContainer.appendChild(history);
-
-    if (result.rarity === "SSR") {
-      alert("🎉超激レアSSRが出た！");
-    }
-
-    gachaButton.disabled = false;
-    gachaButton.style.opacity = "1";
-    gachaButton.style.pointerEvents = "auto";
+    revealItem(result, itemPopup, resultContainer);
+    enableButton(gachaButton);
   }, 5000);
 });
