@@ -71,7 +71,7 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const interval = setInterval(() => {
     capsule.src = capsuleImages[index];
     index = (index + 1) % capsuleImages.length;
-  }, 50); // ← 0.05秒
+  }, 50);
 
   // 5秒後に演出終了＆結果表示
   setTimeout(() => {
