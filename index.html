@@ -1,38 +1,29 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>ガチャガチャアプリ</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <header>
-    <h1>🎁 ガチャガチャを回そう！</h1>
-  </header>
+  <div class="gacha-container">
+    <img id="capsule-image" src="assets/red.png" alt="カプセル" />
+    <button id="gacha-button">ガチャを回す！</button>
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
+    <div id="result">
+      <p class="result-label">大当たり！</p>
+      <img id="item-image" src="" alt="景品画像" />
+      <p id="item-name"></p>
+    </div>
+  </div>
 
   <footer>
-    <p style="font-size: 12px; color: gray;"> Version: html-2025-09-04-v3</p>
+    <p style="font-size: 12px; color: gray;"> Version: html-2025-09-04-v4</p>
   </footer>
-  
-  <main>
-    <section id="csv-loader">
-      <input type="file" id="csvInput" accept=".csv">
-    </section>
 
-    <section id="capsule-container">
-      <img id="capsule" src="assets/gachapon_machine.png" alt="ガチャ筐体画像">
-      <div id="item-popup" class="hidden"></div> <!-- ← カプセルのすぐ下に結果表示 -->
-    </section>
-
-    <section id="progress-bar-container"></section>
-
-    <section id="button-area">
-      <button id="gacha-button">ガチャを回す</button>
-    </section>
-
-    <audio id="gacha-sound" src="assets/gacha.mp3" preload="auto"></audio>
-  </main>
-
-  <script src="script.js" defer></script>
+  <script src="script.js"></script>
 </body>
 </html>
