@@ -1,11 +1,12 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ script.js 2025-9-4-v12 is loaded");
+  console.log("✅ script.js 2025-9-4-v13 is loaded");
 });
 
 const csvUpload = document.getElementById("csv-upload");
 const gachaButton = document.getElementById("gacha-button");
 const capsuleImage = document.getElementById("capsule-image");
 const itemName = document.getElementById("item-name");
+const resultArea = document.getElementById("result-area");
 const progressBar = document.querySelector(".progress-bar");
 const progressFill = document.querySelector(".progress-fill");
 
@@ -47,16 +48,15 @@ gachaButton.addEventListener("click", () => {
     return;
   }
 
+  resultArea.style.display = "none";
   itemName.textContent = "";
   progressBar.style.display = "block";
 
-  // プログレスバーのアニメーション再適用
   progressFill.style.width = "0%";
   progressFill.style.animation = "none";
   void progressFill.offsetWidth;
   progressFill.style.animation = "fillProgress 5s linear forwards";
 
-  // カプセル画像を高速ループ
   let index = 0;
   loopInterval = setInterval(() => {
     const current = gachaItems[index % gachaItems.length];
@@ -64,14 +64,14 @@ gachaButton.addEventListener("click", () => {
       capsuleImage.src = current.image;
     }
     index++;
-  }, 100); // 0.1秒間隔に調整（20msだと速すぎて見えないことも）
+  }, 100);
 
-  // 5秒後に抽選結果を表示
   setTimeout(() => {
     clearInterval(loopInterval);
     const selected = gachaItems[Math.floor(Math.random() * gachaItems.length)];
     capsuleImage.src = selected.image;
     itemName.textContent = selected.name;
+    resultArea.style.display = "block";
     progressBar.style.display = "none";
   }, 5000);
 });
