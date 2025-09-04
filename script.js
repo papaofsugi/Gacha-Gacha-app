@@ -87,10 +87,10 @@ function revealItem(result, popup, resultContainer) {
   li.innerHTML = popup.innerHTML;
   document.getElementById("history-list")?.prepend(li);
 
-  const history = document.createElement("div");
-  history.className = "item";
-  history.innerHTML = popup.innerHTML;
-  resultContainer.appendChild(history);
+  //const history = document.createElement("div");
+  //history.className = "item";
+  //history.innerHTML = popup.innerHTML;
+  //resultContainer.appendChild(history);
 
   if (result.rarity === "SSR") {
     alert("🎉超激レアSSRが出た！");
