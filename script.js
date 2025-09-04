@@ -1,12 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ script.js 2025-9-4-v11 is loaded");
+  console.log("✅ script.js 2025-9-4-v12 is loaded");
 });
 
 const csvUpload = document.getElementById("csv-upload");
 const gachaButton = document.getElementById("gacha-button");
 const capsuleImage = document.getElementById("capsule-image");
-const resultDiv = document.getElementById("result");
-const itemImage = document.getElementById("item-image");
 const itemName = document.getElementById("item-name");
 const progressBar = document.querySelector(".progress-bar");
 const progressFill = document.querySelector(".progress-fill");
@@ -22,7 +20,7 @@ csvUpload.addEventListener("change", (event) => {
   const reader = new FileReader();
   reader.onload = () => {
     const text = reader.result;
-    const lines = text.trim().split(/\r?\n/); // 改行コード対応
+    const lines = text.trim().split(/\r?\n/);
     gachaItems = [];
 
     for (let i = 1; i < lines.length; i++) {
@@ -49,7 +47,7 @@ gachaButton.addEventListener("click", () => {
     return;
   }
 
-  resultDiv.style.display = "none";
+  itemName.textContent = "";
   progressBar.style.display = "block";
 
   // プログレスバーのアニメーション再適用
@@ -57,9 +55,6 @@ gachaButton.addEventListener("click", () => {
   progressFill.style.animation = "none";
   void progressFill.offsetWidth;
   progressFill.style.animation = "fillProgress 5s linear forwards";
-
-  // 抽選開始時に最初のカプセル画像に切り替え
-  capsuleImage.src = gachaItems[0].image;
 
   // カプセル画像を高速ループ
   let index = 0;
@@ -69,16 +64,14 @@ gachaButton.addEventListener("click", () => {
       capsuleImage.src = current.image;
     }
     index++;
-  }, 20);
+  }, 100); // 0.1秒間隔に調整（20msだと速すぎて見えないことも）
 
   // 5秒後に抽選結果を表示
   setTimeout(() => {
     clearInterval(loopInterval);
     const selected = gachaItems[Math.floor(Math.random() * gachaItems.length)];
     capsuleImage.src = selected.image;
-    itemImage.src = selected.image;
     itemName.textContent = selected.name;
-    resultDiv.style.display = "block";
     progressBar.style.display = "none";
   }, 5000);
 });
