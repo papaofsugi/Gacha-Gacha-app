@@ -77,7 +77,7 @@ function hideProgressBar(container) {
 function revealItem(result, popup) {
   popup.innerHTML = `<span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>`;
   popup.classList.remove("hidden");
-  popup.classList.add("item-reveal";
+  popup.classList.add("item-reveal");
 
   if (result.rarity === "SSR") {
     alert("🎉超激レアSSRが出た！");
