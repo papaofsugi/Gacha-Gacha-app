@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ script.js 2025-9-4-v13 is loaded");
+  console.log("✅ script.js 2025-9-4-v14 is loaded");
 });
 
 const csvUpload = document.getElementById("csv-upload");
@@ -52,6 +52,9 @@ gachaButton.addEventListener("click", () => {
   itemName.textContent = "";
   progressBar.style.display = "block";
 
+  // 即座にカプセル画像に切り替え
+  capsuleImage.src = gachaItems[0].image;
+
   progressFill.style.width = "0%";
   progressFill.style.animation = "none";
   void progressFill.offsetWidth;
@@ -64,7 +67,7 @@ gachaButton.addEventListener("click", () => {
       capsuleImage.src = current.image;
     }
     index++;
-  }, 100);
+  }, 100); // 高速切り替え
 
   setTimeout(() => {
     clearInterval(loopInterval);
