@@ -11,9 +11,9 @@
   </header>
 
   <footer>
-    <p style="font-size: 12px; color: gray;"> Version: html-2025-09-04-v2</p>
+    <p style="font-size: 12px; color: gray;"> Version: html-2025-09-04-v3</p>
   </footer>
-
+  
   <main>
     <section id="csv-loader">
       <input type="file" id="csvInput" accept=".csv">
@@ -21,7 +21,7 @@
 
     <section id="capsule-container">
       <img id="capsule" src="assets/gachapon_machine.png" alt="ガチャ筐体画像">
-      <div id="item-popup" class="hidden"></div>
+      <div id="item-popup" class="hidden"></div> <!-- ← カプセルのすぐ下に結果表示 -->
     </section>
 
     <section id="progress-bar-container"></section>
@@ -30,15 +30,9 @@
       <button id="gacha-button">ガチャを回す</button>
     </section>
 
-    <section id="result"></section>
-
     <audio id="gacha-sound" src="assets/gacha.mp3" preload="auto"></audio>
   </main>
 
   <script src="script.js" defer></script>
 </body>
 </html>
-
-
-
-
