@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ script.js 2025-9-4-v9 is loaded");
+  console.log("✅ script.js 2025-9-4-v10 is loaded");
 });
 
 const csvUpload = document.getElementById("csv-upload");
@@ -22,20 +22,15 @@ csvUpload.addEventListener("change", (event) => {
   const reader = new FileReader();
   reader.onload = () => {
     const text = reader.result;
-    const lines = text.trim().split("\n");
-    const headers = lines[0].split(",");
+    const lines = text.trim().split(/\r?\n/); // 改行コード対応
+    gachaItems = [];
 
-    gachaItems = lines.slice(1).map(line => {
-      const values = line.split(",");
-      const item = {};
-      headers.forEach((header, index) => {
-        item[header.trim()] = values[index]?.trim() || "";
-      });
-      return {
-        name: item["name"],
-        image: item["image"]
-      };
-    }).filter(item => item.name && item.image);
+    for (let i = 1; i < lines.length; i++) {
+      const [name, image] = lines[i].split(",").map(s => s.trim());
+      if (name && image) {
+        gachaItems.push({ name, image });
+      }
+    }
 
     if (gachaItems.length > 0) {
       gachaButton.disabled = false;
