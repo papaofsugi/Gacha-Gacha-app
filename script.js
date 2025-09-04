@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ script.js 2025-9-4-v5 is loaded");
+  console.log("✅ script.js 2025-9-4-v6 is loaded");
 });
 
 const gachaItems = [
