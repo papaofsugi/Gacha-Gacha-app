@@ -19,10 +19,15 @@ body {
 
 #capsule-image {
   width: 200px;
+  display: block;
+  margin: 0 auto;
+}
+
+.button-wrapper {
+  margin-top: 20px;
 }
 
 #gacha-button {
-  margin-top: 20px;
   padding: 10px 20px;
   font-size: 18px;
   cursor: pointer;
