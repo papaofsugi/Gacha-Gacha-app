@@ -77,7 +77,7 @@ function hideProgressBar(container) {
 function revealItem(result, popup) {
   popup.innerHTML = `<span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>`;
   popup.classList.remove("hidden");
-  popup.classList.add("item-reveal");
+  popup.classList.add("item-reveal";
 
   if (result.rarity === "SSR") {
     alert("🎉超激レアSSRが出た！");
@@ -107,10 +107,24 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   itemPopup.innerHTML = "";
   showProgressBar(progressContainer);
 
+  const capsuleImages = [
+    "assets/capsule_ssr_red.png",
+    "assets/capsule_sr_green.png",
+    "assets/capsule_r_yellow.png",
+    "assets/capsule_n_blue.png"
+  ];
+  let imgIndex = 0;
+
+  const interval = setInterval(() => {
+    capsuleImg.src = capsuleImages[imgIndex];
+    imgIndex = (imgIndex + 1) % capsuleImages.length;
+  }, 100);
+
   const gachaSound = document.getElementById("gacha-sound");
   gachaSound?.play();
 
   setTimeout(() => {
+    clearInterval(interval);
     capsuleImg.classList.remove("spin-loop");
     hideProgressBar(progressContainer);
     capsuleImg.src = getCapsuleImage(result.rarity);
