@@ -37,13 +37,13 @@ input[type="file"] {
   z-index: 2;
 }
 
-.spin-animation {
-  animation: spin 1s ease-in-out;
-}
-
-@keyframes spin {
+@keyframes spinLoop {
   0%   { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.spin-loop {
+  animation: spinLoop 1s linear infinite;
 }
 
 #item-popup {
@@ -61,6 +61,10 @@ input[type="file"] {
 .item-reveal {
   opacity: 1;
   transform: scale(1.2);
+}
+
+.hidden {
+  display: none;
 }
 
 #gacha-button {
@@ -83,17 +87,26 @@ input[type="file"] {
   background-color: #ff85c1;
 }
 
-#result {
-  margin-top: 40px;
-  max-height: 300px;
-  overflow-y: auto;
-  border-top: 1px solid #ccc;
-  padding-top: 10px;
+#progress-bar-container {
+  width: 25vw;
+  height: 10px;
+  background-color: #ddd;
+  margin: 20px auto;
+  border-radius: 5px;
+  overflow: hidden;
+  visibility: hidden;
 }
 
-.item {
-  margin: 10px 0;
-  font-size: 20px;
+#progress-bar {
+  height: 100%;
+  width: 0%;
+  background-color: #ff69b4;
+  animation: progress 5s linear forwards;
+}
+
+@keyframes progress {
+  from { width: 0%; }
+  to   { width: 100%; }
 }
 
 .rarity {
@@ -120,39 +133,6 @@ input[type="file"] {
   color: #333;
 }
 
-#progress-bar-container {
-  width: 25vw;
-  height: 10px;
-  background-color: #ddd;
-  margin: 20px auto;
-  border-radius: 5px;
-  overflow: hidden;
-  visibility: hidden;
-}
-
-#progress-bar {
-  height: 100%;
-  width: 0%;
-  background-color: #ff69b4;
-  animation: progress 5s linear forwards;
-}
-
-@keyframes progress {
-  from { width: 0%; }
-  to   { width: 100%; }
-}
-
-#history-list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-#history-list li {
-  padding: 8px;
-  border-bottom: 1px solid #eee;
-}
-
 @media (max-width: 600px) {
   #capsule {
     width: 100px;
@@ -166,13 +146,4 @@ input[type="file"] {
   .item {
     font-size: 16px;
   }
-}
-
-@keyframes spinLoop {
-  0%   { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.spin-loop {
-  animation: spinLoop 1s linear infinite;
 }
