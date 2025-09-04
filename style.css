@@ -167,3 +167,12 @@ input[type="file"] {
     font-size: 16px;
   }
 }
+
+@keyframes spinLoop {
+  0%   { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.spin-loop {
+  animation: spinLoop 1s linear infinite;
+}
