@@ -1,3 +1,10 @@
+.page-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 30px;
+}
+
 body {
   font-family: sans-serif;
   background-color: #f0f8ff;
@@ -34,6 +41,11 @@ body {
   height: 100%;
   width: 0%;
   background-color: #00bfff;
+}
+
+@keyframes fillProgress {
+  0% { width: 0%; }
+  100% { width: 100%; }
 }
 
 #result {
