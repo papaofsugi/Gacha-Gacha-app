@@ -1,9 +1,17 @@
+/* タイトル演出 */
 .page-title {
-  font-size: 28px;
+  font-size: 42px; /* 1.5倍サイズ */
   font-weight: bold;
-  color: #333;
   margin-bottom: 30px;
 }
+
+.page-title span:nth-child(1) { color: red; }
+.page-title span:nth-child(2) { color: orange; }
+.page-title span:nth-child(3) { color: yellow; }
+.page-title span:nth-child(4) { color: green; }
+.page-title span:nth-child(5) { color: blue; }
+.page-title span:nth-child(6) { color: indigo; }
+.page-title span:nth-child(7) { color: violet; }
 
 body {
   font-family: sans-serif;
@@ -63,13 +71,13 @@ body {
 }
 
 .result-label {
-  font-size: 48px; /* 2倍サイズ */
+  font-size: 48px;
   color: #ff4500;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
 #item-name {
-  font-size: 36px; /* 2倍サイズ */
+  font-size: 36px;
   margin-top: 10px;
 }
