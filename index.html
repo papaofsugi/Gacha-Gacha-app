@@ -11,12 +11,19 @@
 
   <div class="gacha-container">
     <img id="capsule-image" src="assets/gachapon_machine.png" alt="筐体" />
-    <div class="button-wrapper">
-      <button id="gacha-button">ガチャを回す！</button>
+    
+    <div class="upload-wrapper">
+      <input type="file" id="csv-upload" accept=".csv" />
     </div>
+
+    <div class="button-wrapper">
+      <button id="gacha-button" disabled>ガチャを回す！</button>
+    </div>
+
     <div class="progress-bar" style="display: none;">
       <div class="progress-fill"></div>
     </div>
+
     <div id="result">
       <p class="result-label">大当たり！</p>
       <img id="item-image" src="" alt="景品画像" />
@@ -25,7 +32,7 @@
   </div>
 
   <footer>
-    <p style="font-size: 12px; color: gray;"> Version: html-2025-09-04-v5</p>
+    <p style="font-size: 12px; color: gray;"> Version: html-2025-09-04-v6</p>
   </footer>
 
   <script src="script.js"></script>
