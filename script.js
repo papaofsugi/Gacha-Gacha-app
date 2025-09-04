@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ script.js 2025-9-4-v7 is loaded");
+  console.log("✅ script.js 2025-9-4-v8 is loaded");
 });
 
 const gachaButton = document.getElementById("gacha-button");
@@ -24,13 +24,13 @@ async function loadCSV() {
     const values = line.split(",");
     const item = {};
     headers.forEach((header, index) => {
-      item[header.trim()] = values[index].trim();
+      item[header.trim()] = values[index]?.trim() || "";
     });
     return {
       name: item["name"],
       image: item["image"]
     };
-  });
+  }).filter(item => item.name && item.image);
 }
 
 // ガチャ処理
@@ -51,7 +51,10 @@ gachaButton.addEventListener("click", async () => {
   // カプセル画像を高速ループ
   let index = 0;
   loopInterval = setInterval(() => {
-    capsuleImage.src = gachaItems[index % gachaItems.length].image;
+    const current = gachaItems[index % gachaItems.length];
+    if (current && current.image) {
+      capsuleImage.src = current.image;
+    }
     index++;
   }, 20);
 
