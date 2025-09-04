@@ -10,29 +10,30 @@
   <h1 class="page-title">職場交流会　ガチャガチャたいむ</h1>
 
   <div class="gacha-container">
-    <img id="capsule-image" src="assets/gachapon_machine.png" alt="筐体" />
-    
+    <!-- 表示エリアはこの1つだけ -->
+    <img id="capsule-image" src="assets/gachapon_machine.png" alt="表示エリア" />
+
+    <!-- CSVアップロード -->
     <div class="upload-wrapper">
       <input type="file" id="csv-upload" accept=".csv" />
     </div>
 
+    <!-- ガチャボタン -->
     <div class="button-wrapper">
       <button id="gacha-button" disabled>ガチャを回す！</button>
     </div>
 
+    <!-- 進捗バー（抽選中のみ表示） -->
     <div class="progress-bar" style="display: none;">
       <div class="progress-fill"></div>
     </div>
 
-    <div id="result">
-      <p class="result-label">大当たり！</p>
-      <img id="item-image" src="" alt="景品画像" />
-      <p id="item-name"></p>
-    </div>
+    <!-- アイテム名表示（結果時のみ） -->
+    <p id="item-name"></p>
   </div>
 
   <footer>
-    <p style="font-size: 12px; color: gray;"> Version: html-2025-09-04-v6</p>
+    <p style="font-size: 12px; color: gray;"> Version: html-2025-09-04-v7</p>
   </footer>
 
   <script src="script.js"></script>
