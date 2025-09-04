@@ -1,7 +1,8 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ script.js 2025-9-4-v8 is loaded");
+  console.log("✅ script.js 2025-9-4-v9 is loaded");
 });
 
+const csvUpload = document.getElementById("csv-upload");
 const gachaButton = document.getElementById("gacha-button");
 const capsuleImage = document.getElementById("capsule-image");
 const resultDiv = document.getElementById("result");
@@ -13,42 +14,49 @@ const progressFill = document.querySelector(".progress-fill");
 let gachaItems = [];
 let loopInterval;
 
-// CSVを読み込んでパースする関数
-async function loadCSV() {
-  const response = await fetch("item.csv");
-  const text = await response.text();
-  const lines = text.trim().split("\n");
-  const headers = lines[0].split(",");
+// CSVファイルを読み込んで配列に変換
+csvUpload.addEventListener("change", (event) => {
+  const file = event.target.files[0];
+  if (!file) return;
 
-  gachaItems = lines.slice(1).map(line => {
-    const values = line.split(",");
-    const item = {};
-    headers.forEach((header, index) => {
-      item[header.trim()] = values[index]?.trim() || "";
-    });
-    return {
-      name: item["name"],
-      image: item["image"]
-    };
-  }).filter(item => item.name && item.image);
-}
+  const reader = new FileReader();
+  reader.onload = () => {
+    const text = reader.result;
+    const lines = text.trim().split("\n");
+    const headers = lines[0].split(",");
+
+    gachaItems = lines.slice(1).map(line => {
+      const values = line.split(",");
+      const item = {};
+      headers.forEach((header, index) => {
+        item[header.trim()] = values[index]?.trim() || "";
+      });
+      return {
+        name: item["name"],
+        image: item["image"]
+      };
+    }).filter(item => item.name && item.image);
+
+    if (gachaItems.length > 0) {
+      gachaButton.disabled = false;
+      console.log("✅ CSV読み込み完了:", gachaItems);
+    } else {
+      alert("CSVに有効なデータがありません！");
+    }
+  };
+  reader.readAsText(file);
+});
 
 // ガチャ処理
-gachaButton.addEventListener("click", async () => {
-  if (gachaItems.length === 0) {
-    await loadCSV();
-  }
-
+gachaButton.addEventListener("click", () => {
   resultDiv.style.display = "none";
   progressBar.style.display = "block";
 
-  // プログレスバーのアニメーション再適用
   progressFill.style.width = "0%";
   progressFill.style.animation = "none";
   void progressFill.offsetWidth;
   progressFill.style.animation = "fillProgress 5s linear forwards";
 
-  // カプセル画像を高速ループ
   let index = 0;
   loopInterval = setInterval(() => {
     const current = gachaItems[index % gachaItems.length];
@@ -58,7 +66,6 @@ gachaButton.addEventListener("click", async () => {
     index++;
   }, 20);
 
-  // 5秒後に抽選結果を表示
   setTimeout(() => {
     clearInterval(loopInterval);
     const selected = gachaItems[Math.floor(Math.random() * gachaItems.length)];
