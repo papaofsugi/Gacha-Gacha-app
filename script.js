@@ -1,7 +1,7 @@
 let items = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ script.js 2025-9-4-v2 is loaded");
+  console.log("✅ script.js 2025-9-4-v3 is loaded");
 });
 
 document.getElementById("csvInput").addEventListener("change", function (e) {
@@ -13,11 +13,6 @@ document.getElementById("csvInput").addEventListener("change", function (e) {
     const text = event.target.result;
     items = parseCSV(text);
     alert(`CSV読み込み完了！アイテム数：${items.length}`);
-
-    // デバッグ表示（任意）
-    //const debug = document.createElement("pre");
-    //debug.textContent = JSON.stringify(items, null, 2);
-    //document.body.appendChild(debug);
   };
   reader.readAsText(file);
 });
@@ -79,18 +74,10 @@ function hideProgressBar(container) {
   container.style.visibility = "hidden";
 }
 
-function revealItem(result, popup, resultContainer) {
+function revealItem(result, popup) {
   popup.innerHTML = `<span class="rarity ${result.rarity}">${result.rarity}</span>：<span class="name">${result.name}</span>`;
+  popup.classList.remove("hidden");
   popup.classList.add("item-reveal");
-
-  const li = document.createElement("li");
-  li.innerHTML = popup.innerHTML;
-  document.getElementById("history-list")?.prepend(li);
-
-  //const history = document.createElement("div");
-  //history.className = "item";
-  //history.innerHTML = popup.innerHTML;
-  //resultContainer.appendChild(history);
 
   if (result.rarity === "SSR") {
     alert("🎉超激レアSSRが出た！");
@@ -110,38 +97,24 @@ document.getElementById("gacha-button").addEventListener("click", () => {
   const result = getWeightedItem();
   const capsuleImg = document.getElementById("capsule");
   const itemPopup = document.getElementById("item-popup");
-  const resultContainer = document.getElementById("result");
   const progressContainer = document.getElementById("progress-bar-container");
   const gachaButton = document.getElementById("gacha-button");
 
   disableButton(gachaButton);
-  capsuleImg.classList.add("spin-animation");
+  capsuleImg.classList.add("spin-loop");
   capsuleImg.src = "assets/capsule_n_blue.png";
   itemPopup.classList.remove("item-reveal");
   itemPopup.innerHTML = "";
   showProgressBar(progressContainer);
 
-  const capsuleImages = [
-    "assets/capsule_ssr_red.png",
-    "assets/capsule_sr_green.png",
-    "assets/capsule_r_yellow.png",
-    "assets/capsule_n_blue.png"
-  ];
-  let imgIndex = 0;
-  const interval = setInterval(() => {
-    capsuleImg.src = capsuleImages[imgIndex];
-    imgIndex = (imgIndex + 1) % capsuleImages.length;
-  }, 50);
-
   const gachaSound = document.getElementById("gacha-sound");
   gachaSound?.play();
 
   setTimeout(() => {
-    clearInterval(interval);
-    capsuleImg.classList.remove("spin-animation");
+    capsuleImg.classList.remove("spin-loop");
     hideProgressBar(progressContainer);
     capsuleImg.src = getCapsuleImage(result.rarity);
-    revealItem(result, itemPopup, resultContainer);
+    revealItem(result, itemPopup);
     enableButton(gachaButton);
   }, 5000);
 });
