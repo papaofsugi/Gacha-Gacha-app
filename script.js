@@ -1,26 +1,46 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ script.js 2025-9-4-v6 is loaded");
+  console.log("✅ script.js 2025-9-4-v7 is loaded");
 });
-
-const gachaItems = [
-  { name: "SSR 赤ゼリー", image: "assets/capsule_ssr_red.png" },
-  { name: "SR 緑カプセル", image: "assets/capsule_sr_green.png" },
-  { name: "R 黄色エネルギー", image: "assets/capsule_r_yellow.png" },
-  { name: "N 水ドーム", image: "assets/capsule_n_blue.png" }
-];
 
 const gachaButton = document.getElementById("gacha-button");
 const capsuleImage = document.getElementById("capsule-image");
 const resultDiv = document.getElementById("result");
 const itemImage = document.getElementById("item-image");
 const itemName = document.getElementById("item-name");
+const progressBar = document.querySelector(".progress-bar");
 const progressFill = document.querySelector(".progress-fill");
 
+let gachaItems = [];
 let loopInterval;
 
-gachaButton.addEventListener("click", () => {
+// CSVを読み込んでパースする関数
+async function loadCSV() {
+  const response = await fetch("item.csv");
+  const text = await response.text();
+  const lines = text.trim().split("\n");
+  const headers = lines[0].split(",");
+
+  gachaItems = lines.slice(1).map(line => {
+    const values = line.split(",");
+    const item = {};
+    headers.forEach((header, index) => {
+      item[header.trim()] = values[index].trim();
+    });
+    return {
+      name: item["name"],
+      image: item["image"]
+    };
+  });
+}
+
+// ガチャ処理
+gachaButton.addEventListener("click", async () => {
+  if (gachaItems.length === 0) {
+    await loadCSV();
+  }
+
   resultDiv.style.display = "none";
-  capsuleImage.src = gachaItems[0].image;
+  progressBar.style.display = "block";
 
   // プログレスバーのアニメーション再適用
   progressFill.style.width = "0%";
@@ -33,7 +53,7 @@ gachaButton.addEventListener("click", () => {
   loopInterval = setInterval(() => {
     capsuleImage.src = gachaItems[index % gachaItems.length].image;
     index++;
-  }, 20); // 0.02秒間隔
+  }, 20);
 
   // 5秒後に抽選結果を表示
   setTimeout(() => {
@@ -43,5 +63,6 @@ gachaButton.addEventListener("click", () => {
     itemImage.src = selected.image;
     itemName.textContent = selected.name;
     resultDiv.style.display = "block";
+    progressBar.style.display = "none";
   }, 5000);
 });
