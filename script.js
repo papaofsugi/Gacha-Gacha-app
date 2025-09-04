@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ script.js 2025-9-4-v10 is loaded");
+  console.log("✅ script.js 2025-9-4-v11 is loaded");
 });
 
 const csvUpload = document.getElementById("csv-upload");
@@ -44,14 +44,24 @@ csvUpload.addEventListener("change", (event) => {
 
 // ガチャ処理
 gachaButton.addEventListener("click", () => {
+  if (gachaItems.length === 0) {
+    alert("CSVが読み込まれていません！");
+    return;
+  }
+
   resultDiv.style.display = "none";
   progressBar.style.display = "block";
 
+  // プログレスバーのアニメーション再適用
   progressFill.style.width = "0%";
   progressFill.style.animation = "none";
   void progressFill.offsetWidth;
   progressFill.style.animation = "fillProgress 5s linear forwards";
 
+  // 抽選開始時に最初のカプセル画像に切り替え
+  capsuleImage.src = gachaItems[0].image;
+
+  // カプセル画像を高速ループ
   let index = 0;
   loopInterval = setInterval(() => {
     const current = gachaItems[index % gachaItems.length];
@@ -61,6 +71,7 @@ gachaButton.addEventListener("click", () => {
     index++;
   }, 20);
 
+  // 5秒後に抽選結果を表示
   setTimeout(() => {
     clearInterval(loopInterval);
     const selected = gachaItems[Math.floor(Math.random() * gachaItems.length)];
