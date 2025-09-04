@@ -1,7 +1,7 @@
 let items = [];
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("✅ script.js is loaded");
+  console.log("✅ script.js 2025-9-4-v1 is loaded");
 });
 
 document.getElementById("csvInput").addEventListener("change", function (e) {
