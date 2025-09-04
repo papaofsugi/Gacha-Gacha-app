@@ -63,13 +63,13 @@ body {
 }
 
 .result-label {
-  font-size: 24px;
+  font-size: 48px; /* 2倍サイズ */
   color: #ff4500;
   font-weight: bold;
-  margin-bottom: 5px;
+  margin-bottom: 10px;
 }
 
 #item-name {
-  font-size: 18px;
-  margin-top: 5px;
+  font-size: 36px; /* 2倍サイズ */
+  margin-top: 10px;
 }
